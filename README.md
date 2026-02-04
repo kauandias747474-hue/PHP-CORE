@@ -1,108 +1,74 @@
-# 🛡️ Hardened PHP Core: Secure Backend Engineering
+# 🚀 Robust PHP Core: Enterprise-Grade Backend Architecture
 
-> **"Security is not a feature; it is the fundamental state of digital matter."**
-> *"Segurança não é um recurso; é o estado fundamental da matéria digital."*
+> **"Software excellence is achieved when security, performance, and maintainability converge."**
+> *"A excelência de software é alcançada quando segurança, performance e manutenibilidade convergem."*
 
 ![PHP](https://img.shields.io/badge/Language-PHP_8.x-777bb3?style=for-the-badge&logo=php)
-![Security](https://img.shields.io/badge/Focus-Offensive_&_Defensive-red?style=for-the-badge)
-![Compliance](https://img.shields.io/badge/Standard-OWASP_Top_10_Mitigation-blue?style=for-the-badge)
-![Framework](https://img.shields.io/badge/Dependency-Zero_Framework-green?style=for-the-badge)
+![Architecture](https://img.shields.io/badge/Focus-Clean_Architecture-blue?style=for-the-badge)
+![Stability](https://img.shields.io/badge/Standard-High_Availability-green?style=for-the-badge)
+![Framework](https://img.shields.io/badge/Dependency-Zero_Framework-success?style=for-the-badge)
 
 ---
 
 ## 📖 Resumo / Overview
 
-**PT-BR:** O `hardened-php-core` é uma implementação de referência para arquiteturas de backend onde a segurança é tratada como requisito primário. Este projeto foca na mitigação de vetores de ataque do **OWASP Top 10** diretamente no motor da aplicação, utilizando PHP puro para garantir controle total sobre o fluxo de dados.
+**PT-BR:** O `robust-php-core` é uma implementação de referência em PHP puro (Vanilla), projetada para sistemas que exigem integridade de dados e estabilidade operacional. Este projeto demonstra como construir uma base de código modular e resiliente, focando em padrões de design (Design Patterns) e eliminando a dependência de frameworks externos para garantir performance máxima.
 
-**EN-US:** `hardened-php-core` is a reference implementation for backend architectures where security is a primary requirement. This project focuses on mitigating **OWASP Top 10** attack vectors directly at the application engine level, using Vanilla PHP to ensure total control over data flow.
-
----
-
-## 🎯 Proposta de Valor / Value Proposition
-
-### 🎓 Pesquisa & Academia (Academic Research)
-Um estudo prático sobre a anatomia das vulnerabilidades web. Este repositório expõe como falhas de injeção ocorrem no nível do interpretador e demonstra técnicas de filtragem determinística.
-*A practical study on web vulnerability anatomy, demonstrating deterministic filtering and Defense in Depth.*
-
-### 💼 Portfólio de Engenharia (Recruiters)
-A prova de um desenvolvedor que domina os fundamentos. Proteção de **sistemas legados** e aplicações críticas, reduzindo a dívida técnica de segurança em infraestruturas de alta confiabilidade.
-*Proof of fundamental mastery. Securing legacy systems and critical apps, reducing technical debt in high-reliability infrastructures.*
-
-### 🚀 Consultoria & Freelance (Business Focus)
-Foco em **Continuidade de Negócio**. Transformo aplicações vulneráveis em fortalezas digitais, eliminando a dependência exclusiva de WAFs externos e blindando o código-fonte.
-*Focus on Business Continuity. Transforming vulnerable apps into digital fortresses by shielding the source code directly.*
+**EN-US:** `robust-php-core` is a reference implementation in Vanilla PHP designed for systems requiring data integrity and operational stability. This project demonstrates how to build a modular and resilient codebase, focusing on Design Patterns and eliminating framework overhead to ensure maximum performance.
 
 ---
 
-## 🛠️ Implementações de Blindagem / Hardening Features
+## 🎯 Direcionamento / Target Audience
 
-| Feature | Technical Description (EN) | Descrição Técnica (PT) | Vector Mitigated |
-| :--- | :--- | :--- | :--- |
-| **SQLi Prevention** | Strict PDO Prepared Statements with strong typing. | Implementação rigorosa de Prepared Statements via PDO. | SQL Injection |
-| **Session Hardening** | `HttpOnly`, `Secure`, `SameSite=Strict` & ID Regeneration. | Gestão de estado ultra-segura com regeneração de IDs. | Session Hijacking |
-| **Input Sanitization** | Type-based Whitelisting (Mathematical conformity). | Filtros baseados em lógica de tipos (Whitelist-only). | XSS / RCE |
-| **Active Defense** | Dynamic Security Headers (CSP, HSTS, XSS-Protection). | Injeção granular de cabeçalhos de segurança ativos. | Clickjacking / MITM |
-| **Atomic Crypto** | AES-256-GCM wrapper for sensitive data at rest. | Wrapper AES-256-GCM para proteção de dados sensíveis. | Data Exposure |
+### 🎓 Fins Acadêmicos (Academic Research)
+Uma implementação prática para o estudo de **Arquitetura de Sistemas** e **Segurança por Design**. Ideal para entender o ciclo de vida de uma requisição e a aplicação de lógica determinística no tratamento de dados.
 
----
+### 💼 Clientes & Consultoria (Business Impact)
+Foco em **Continuidade de Negócio**. Entrego soluções para modernização de sistemas legados, garantindo que a aplicação seja robusta, rápida e imune a falhas lógicas comuns, reduzindo custos de infraestrutura.
 
-## 📐 Metodologia "Vanilla Security" (Anti-Erro)
-
-Para assegurar que nenhum erro de lógica comprometa a aplicação, adoto um fluxo de desenvolvimento rigoroso baseado em princípios matemáticos:
-
-1.  **Zero-Framework Dependency:** Controle total. Sem vulnerabilidades ocultas em dependências de terceiros. (*Total control. No hidden vulnerabilities in 3rd party libs.*)
-2.  **Mathematical Validation:** Se o dado não corresponde exatamente ao modelo matemático/tipo definido, ele é descartado (**Deny by Default**). (*If data doesn't match the math model, it's discarded.*)
-3.  **Offensive Validation:** Cada defesa é validada contra scripts de ataque (PoCs) reais antes do commit. (*Every defense is validated against real exploit PoCs.*)
+### 🚀 Recrutadores (Engineering Excellence)
+Demonstração de domínio profundo do ecossistema PHP. Este portfólio evidencia competências em **Clean Code**, criptografia de ponta, gestão de sessões e conformidade com boas práticas globais de desenvolvimento.
 
 ---
 
-## 📂 Estrutura do Ecossistema / Project Structure
+## 🛠️ Pilares de Engenharia / Core Engineering Pillars
 
-* 📁 **[`/core/security`](./core/security):**
-    * `Sanitizer.php`: Engine de limpeza de inputs.
-    * `Crypto.php`: Criptografia simétrica de alta performance.
-    * `Guard.php`: Middleware de proteção de cabeçalhos.
-* 📁 **[`/lab/exploits`](./lab/exploits):**
-    * Laboratório de ataques controlados para demonstração de vulnerabilidades (PoC).
-* 📁 **[`/docs/hardening-guide`](./docs/hardening-guide):**
-    * Guia técnico de implementação para sistemas legados.
-
----
-
-## ⚠️ Aviso de Ética / Ethical Warning
-
-**PT-BR:** Este repositório foi criado para fins educacionais e fortalecimento de sistemas. O uso de técnicas ofensivas sem autorização é ilegal.
-**EN-US:** This repository is for educational and defensive purposes. Using offensive techniques without authorization is illegal and unethical.
+| Feature | Descrição Técnica | Benefício para o Negócio |
+| :--- | :--- | :--- |
+| **Data Integrity** | Tipagem estrita e validação rigorosa de inputs. | Redução de erros em produção e dados confiáveis. |
+| **Session Hardening** | Gestão de estado com foco em persistência e proteção. | Segurança da identidade do usuário final. |
+| **Clean Architecture** | Separação clara entre lógica de negócio e infraestrutura. | Código fácil de manter e evoluir a longo prazo. |
+| **Modern Crypto** | Abstração para criptografia simétrica AES-256-GCM. | Proteção de ativos digitais e dados sensíveis. |
+| **Performance** | Zero overhead de terceiros (Vanilla PHP). | Menor consumo de servidor e resposta ultra rápida. |
 
 ---
 
+## 📐 Metodologia de Desenvolvimento
 
-## 👨‍💻 Author & Engineering Mindset | Autoria e Engenharia
-**Kauan Oliveira** - *Systems & Security Engineer*
+Para garantir que o software seja um ativo de valor, sigo diretrizes de alta engenharia:
 
-![PHP Security](https://img.shields.io/badge/PHP-Hardened-777BB4?style=for-the-badge&logo=php&logoColor=white)
-![OWASP Mitigation](https://img.shields.io/badge/OWASP-Mitigation-black?style=for-the-badge)
-![Secure Flow](https://img.shields.io/badge/Secure-Flow-red?style=for-the-badge)
+1. **Zero-Framework Dependency:** Controle total sobre o fluxo de dados, eliminando vulnerabilidades ocultas e dívidas técnicas de atualização.
+2. **Deny-by-Default:** Princípio de segurança onde apenas dados explicitamente validados são processados pela aplicação.
+3. **Modularidade:** Componentes independentes que podem ser reutilizados em diferentes projetos ou integrados a arquiteturas de microserviços.
 
-**PT-BR:** Implementação de referência para mitigar o OWASP Top 10 diretamente no motor da aplicação. Toda a lógica de sanitização e proteção de cabeçalhos foi desenhada em papel A4 para garantir um fluxo de dados blindado, independente de defesas externas como WAFs.
-
-**EN-US:** Reference implementation to mitigate the OWASP Top 10 directly in the application engine. All sanitization and header protection logic was designed on A4 paper to ensure a shielded data flow, independent of external defenses like WAFs.
-
-### 🎯 Objective
-Atualmente focado em **Freelance de Alta Performance** e **Pesquisa em Bug Bounty**. 
 ---
-## 📩 Contato & Consultoria / Contact
-**Precisa blindar seu sistema ou de uma auditoria de segurança?**
-**Need to harden your system or a security audit?**
+
+## 📂 Estrutura do Projeto / Project Structure
+
+* 📁 **[`/src/Core`](./src/Core):** Motores principais, tratamento de exceções e lógica base.
+* 📁 **[`/src/Security`](./src/Security):** Componentes de criptografia, sanitização e proteção de headers.
+* 📁 **[`/src/Infrastructure`](./src/Infrastructure):** Abstração de banco de dados (PDO) e serviços externos.
+* 📁 **[`/docs`](./docs):** Documentação de arquitetura e guias de implementação.
+
+---
+
+## 👨‍💻 Autor / Author
+**Kauan Oliveira** - *Backend Software Engineer*
+
+Engenheiro de Sistemas focado em construir soluções robustas e seguras. Minha abordagem une a teoria acadêmica com a necessidade pragmática do mercado.
+
 - **LinkedIn:** [Kauan Oliveira](https://www.linkedin.com/in/kauan-oliveira-324264378/)
-- **Bug Bounty Portfolio:** [HackerOne/Profile]
-- **Professional Email:** [Seu Email]
-
-**Developed in 2026 by Kauan Oliveira / Feito em 2026 por Kauan Oliveira**
----
-* 🛡️ **Bug Bounty Portfolio:** [HackerOne/Profile](#)
-* 💼 **Freelance Inquiries:** [Consultancy/Email](#)
-* 📊 **Mathematics & Logic:** *All core logic is validated via mathematical models.*
+- **Email Profissional:** [Seu Email]
 
 ---
-*Developed in 2026 by Kauan Oliveira / Feito em 2026 por Kauan Oliveira*
+*Developed in 2026 by Kauan Oliveira*
