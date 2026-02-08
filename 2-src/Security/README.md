@@ -1,16 +1,17 @@
 # 🛡️ Security & Protection Layer
 
-**PT-BR:** Implementação de mecanismos defensivos. Focado no princípio de "Deny-by-Default", tratando criptografia de ponta, gestão de sessões e sanitização rigorosa.
-**EN-US:** Implementation of defensive mechanisms. Focused on the "Deny-by-Default" principle, handling high-end cryptography, session management, and rigorous sanitization.
+**PT-BR:** Camada defensiva projetada sob o princípio de "Deny-by-Default", tratando criptografia de ponta e integridade de acesso.
+**EN-US:** Defensive layer designed under the "Deny-by-Default" principle, handling high-end cryptography and access integrity.
 
 ---
 
-## 🔒 Specs Técnicas / Technical Specs
+## 🔒 Implementações de Segurança / Security Implementations
 
-* **Crypto:** AES-256-GCM (Galois/Counter Mode) para cifragem autenticada.
-* **Auth:** Gestão de tokens e controle de acesso baseado em funções (RBAC).
-* **Sanitization:** Proteção contra SQL Injection, XSS e CSRF em nível de engine.
-* **Session:** State management com regeneração de ID e cookies HTTP-only/Secure.
+1. **AES-256-GCM Vault:** Wrapper robusto para cifragem autenticada de dados sensíveis.
+2. **Adaptive Rate Limiter:** Proteção inteligente contra ataques de força bruta e DoS.
+3. **Secure Session Handler:** Gestão de estado criptografada em storage seguro (Redis/DB).
+4. **RBAC Engine:** Controle de acesso granular baseado em funções e permissões (Roles).
+5. **Sanitization Pipeline:** Filtro recursivo contra XSS, CSRF e Injection em nível de engine.
 
 ---
-*Security is not a feature, it's a foundation.*
+*Security is a process, not a product.*
