@@ -56,10 +56,12 @@
 
 ## 📂 Estrutura do Projeto / Project Structure
 
-* 📁 **[`/src/Core`](./src/Core):** Base do sistema / *System core logic.*
-* 📁 **[`/src/Security`](./src/Security):** Componentes de proteção / *Protection components.*
-* 📁 **[`/src/Infrastructure`](./src/Infrastructure):** Banco de dados e serviços / *DB and services.*
-* 📁 **[`/docs`](./docs):** Documentação técnica / *Technical documentation.*
+A organização segue os princípios de separação de responsabilidades, numerada para facilitar a auditoria técnica:
+
+1. 📁 **[`/src/Core`](./src/Core):** **Base do sistema** — Contém o Kernel, tratamento de exceções e lógica de domínio central. / *System core logic.*
+2. 📁 **[`/src/Security`](./src/Security):** **Componentes de proteção** — Implementações de criptografia, sanitização e Auth. / *Protection components.*
+3. 📁 **[`/src/Infrastructure`](./src/Infrastructure):** **Camada de IO** — Drivers de banco de dados, repositórios e serviços externos. / *DB and services.*
+4. 📁 **[`/docs`](./docs):** **Documentação técnica** — Diagramas, especificações de API e guias de implantação. / *Technical documentation.*
 
 ---
 
