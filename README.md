@@ -12,25 +12,21 @@
 
 ## 📖 Resumo / Overview
 
-**PT-BR:** O `robust-php-core` é uma implementação de referência em PHP puro (Vanilla), projetada para sistemas que exigem integridade de dados e estabilidade operacional. Este projeto demonstra como construir uma base de código modular e resiliente, focando em padrões de design (Design Patterns) e eliminando a dependência de frameworks externos para garantir performance máxima.
+**PT-BR:** O `robust-php-core` é uma implementação de referência em PHP puro (Vanilla), projetada para sistemas que exigem integridade de dados e estabilidade operacional. Este projeto demonstra como construir uma base de código modular e resiliente, focando em padrões de design (Design Patterns) e eliminando a dependência de frameworks externos para garantir performance máxima e soberania técnica.
 
-**EN-US:** `robust-php-core` is a reference implementation in Vanilla PHP designed for systems requiring data integrity and operational stability. This project demonstrates how to build a modular and resilient codebase, focusing on Design Patterns and eliminating framework overhead to ensure maximum performance.
+**EN-US:** `robust-php-core` is a reference implementation in Vanilla PHP designed for systems requiring data integrity and operational stability. This project demonstrates how to build a modular and resilient codebase, focusing on Design Patterns and eliminating framework overhead to ensure maximum performance and technical sovereignty.
 
 ---
 
 ## 🎯 Direcionamento / Target Audience
-
-### 🎓 Fins Acadêmicos (Academic Research)
-**PT:** Uma implementação prática para o estudo de **Arquitetura de Sistemas**. Ideal para entender o ciclo de vida de uma requisição e a aplicação de lógica determinística no tratamento de dados.
-**EN:** A practical implementation for **Systems Architecture** studies. Ideal for understanding the request lifecycle and deterministic logic in data handling.
 
 ### 💼 Clientes & Consultoria (Business Impact)
 **PT:** Foco em **Continuidade de Negócio**. Entrego soluções para modernização de sistemas, garantindo que a aplicação seja robusta, rápida e imune a falhas lógicas, reduzindo custos de infraestrutura.
 **EN:** Focus on **Business Continuity**. I deliver solutions for system modernization, ensuring the app is robust, fast, and immune to logic flaws, reducing infrastructure costs.
 
 ### 🚀 Recrutadores (Engineering Excellence)
-**PT:** Demonstração de domínio profundo do ecossistema PHP. Este portfólio evidencia competências em **Clean Code**, criptografia, gestão de sessões e conformidade com boas práticas globais.
-**EN:** Demonstration of deep PHP ecosystem mastery. This portfolio highlights skills in **Clean Code**, cryptography, session management, and compliance with global best practices.
+**PT:** Demonstração de domínio profundo do ecossistema PHP. Este portfólio evidencia competências em **Clean Code**, criptografia, gestão de sessões e conformidade com boas práticas globais de engenharia de software.
+**EN:** Demonstration of deep PHP ecosystem mastery. This portfolio highlights skills in **Clean Code**, cryptography, session management, and compliance with global software engineering best practices.
 
 ---
 
@@ -46,30 +42,25 @@
 
 ---
 
-## 📐 Metodologia / Methodology
-
-1. **Zero-Framework Dependency:** Controle total sobre o fluxo de dados / *Total control over data flow.*
-2. **Deny-by-Default:** Segurança proativa em todas as camadas / *Proactive security at all layers.*
-3. **Modular Design:** Componentes independentes e reutilizáveis / *Independent and reusable components.*
-
----
-
 ## 📂 Estrutura do Projeto / Project Structure
 
-A organização segue os princípios de separação de responsabilidades, numerada para facilitar a auditoria técnica:
+A organização segue os princípios de separação de responsabilidades, numerada para facilitar a auditoria técnica e o entendimento do fluxo de dados:
 
-1. 📁 **[`/src/Core`](./src/Core):** **Base do sistema** — Contém o Kernel, tratamento de exceções e lógica de domínio central. / *System core logic.*
-2. 📁 **[`/src/Security`](./src/Security):** **Componentes de proteção** — Implementações de criptografia, sanitização e Auth. / *Protection components.*
-3. 📁 **[`/src/Infrastructure`](./src/Infrastructure):** **Camada de IO** — Drivers de banco de dados, repositórios e serviços externos. / *DB and services.*
-4. 📁 **[`/docs`](./docs):** **Documentação técnica** — Diagramas, especificações de API e guias de implantação. / *Technical documentation.*
+1. 📁 **[`01-kernel-and-autoloader`](./01-kernel-and-autoloader):** Inicialização do sistema, gerenciamento de erros e carregamento automático de classes.
+2. 📁 **[`02-security-and-cryptography`](./02-security-and-cryptography):** Camada de proteção: AES-256-GCM, sanitização de inputs e mitigação de vulnerabilidades (OWASP).
+3. 📁 **[`03-data-persistence-mysql`](./03-data-persistence-mysql):** Abstração de banco de dados via PDO e implementação de Repository Pattern.
+4. 📁 **[`04-business-core-logic`](./04-business-core-logic):** Onde as regras de negócio residem, isoladas de drivers externos e interfaces.
+5. 📁 **[`05-frontend-integration`](./05-frontend-integration):** Ponte de comunicação entre o backend PHP e interfaces de alta performance (Vanilla JS).
+6. 📁 **[`06-api-and-routing`](./06-api-and-routing):** Gestão de endpoints, rotas do sistema e entrega de respostas processadas.
 
 ---
 
 ## 👨‍💻 Autor / Author
-**Kauan Oliveira** - *Backend Software Engineer*
+**Kauan Oliveira** - *Software Engineer*
 
-- **LinkedIn:** [Kauan Oliveira](https://www.linkedin.com/in/kauan-oliveira-324264378/)
-- **Email:** [Seu Email]
+- **LinkedIn:** [Kauan Oliveira](https://www.linkedin.com/in/kauan-oliveira-119934336/)
+- **Upwork:** [Kauan O. - Freelancer](https://www.upwork.com/freelancers/~01ad97279bec18a667)
 
 ---
+*"Construindo sistemas com soberania técnica e excelência em engenharia."*
 *Developed in 2026 by Kauan Oliveira*
