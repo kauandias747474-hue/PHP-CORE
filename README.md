@@ -35,7 +35,7 @@
 A organização segue os princípios de separação de responsabilidades (SoC), numerada para facilitar a auditoria e o desenvolvimento modular:
 
 1. 📁 **[`01-kernel-and-autoloader`](./01-kernel-and-autoloader):** Core do sistema, gerenciamento de erros (Exception Handling) e Autoload dinâmico.
-2. 📁 **[`02-security-and-cryptography`](./02-security-and-cryptography):** Implementações de criptografia AES-256, sanitização e proteção contra ataques comuns.
+2. 📁 **[`02-service-abstraction-and-di`](./02-service-abstraction-and-di):** Service Container, Injeção de Dependência e contratos de interface.
 3. 📁 **[`03-data-persistence-mysql`](./03-data-persistence-mysql):** Camada de persistência. Abstração PDO, Repository Pattern e gestão de conexões SQL.
 4. 📁 **[`04-business-domain-logic`](./04-business-domain-logic):** O coração da aplicação. Entidades e serviços que definem as regras de negócio.
 5. 📁 **[`05-utility-and-helpers`](./05-utility-and-helpers):** Componentes auxiliares: manipuladores de strings, datas, e ferramentas de log de sistema.
