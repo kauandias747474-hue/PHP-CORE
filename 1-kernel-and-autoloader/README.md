@@ -11,8 +11,7 @@ Gerenciar a inicialização do sistema, garantindo que o ambiente esteja configu
 * **Exception Handling (Security Shield):** Capturador global de erros que impede a exposição de dados sensíveis do servidor para o usuário final.
 * **Environment Management:** Carregamento de variáveis de configuração via arquivos `.env`, isolando dados sensíveis do código-fonte (12-Factor App).
 * **Padrão PSR-4: Interoperabilidade e organização moderna de arquivos.**
-
-Arquitetura de Frameworks: Lógica de tratamento de erros e gestão de ambiente inspirada em Laravel e Symfony
+* **Arquitetura de Frameworks: Lógica de tratamento de erros e gestão de ambiente inspirada em Laravel e Symfony**
 ---
 
 ## 🚀 Demonstrações Práticas (PoC)
