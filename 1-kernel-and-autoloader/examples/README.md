@@ -43,7 +43,21 @@ Este diretório centraliza os scripts de validação do **Core Engine**. Eles se
 * **Goal:** Validate the reading and injection of `.env` file configurations.
 * **What it does:** Requests a specific value from the Kernel that was defined externally in the environment file.
 * **Expected result:** The displayed value must match exactly what is in the `.env`, validating environment management (**12-Factor App**).
+## 🏛️ Alinhamento com Frameworks Modernos / Modern Framework Alignment
 
+Este Core Engine foi desenvolvido seguindo os padrões arquiteturais de frameworks *Enterprise-level*, servindo como uma implementação pedagógica de:
+
+* **Laravel & Symfony (PHP):** Implementação de Ciclo de Vida (Bootstrapping) e Manuseio Global de Exceções (Global Exception Handling).
+* **Spring Boot (Java):** Lógica de inicialização centralizada no Kernel, garantindo que o ambiente esteja pronto antes da execução.
+* **Composer Standards:** Autoloading 100% compatível com a norma **PSR-4**, facilitando a migração para projetos de grande escala.
+
+---
+
+This Core Engine was developed following the architectural patterns of Enterprise-level frameworks, serving as a pedagogical implementation of:
+
+* **Laravel & Symfony (PHP):** Lifecycle implementation (Bootstrapping) and Global Exception Handling.
+* **Spring Boot (Java):** Centralized Kernel initialization logic, ensuring the environment is ready before execution.
+* **Composer Standards:** 100% **PSR-4** compliant Autoloading, facilitating migration to large-scale projects.
 ---
 
 ## 💻 Como Rodar / How to Run
