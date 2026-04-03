@@ -6,7 +6,6 @@
 ![PHP](https://img.shields.io/badge/Language-PHP_8.x-777bb3?style=for-the-badge&logo=php)
 ![Architecture](https://img.shields.io/badge/Focus-Clean_Architecture-blue?style=for-the-badge)
 ![Stability](https://img.shields.io/badge/Standard-High_Availability-green?style=for-the-badge)
-![Framework](https://img.shields.io/badge/Dependency-Zero_Framework-success?style=for-the-badge)
 
 ---
 
