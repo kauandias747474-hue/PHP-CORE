@@ -1,56 +1,87 @@
-# 🚀 Robust PHP Core: Enterprise-Grade Backend Architecture
+# PHP CORE 🐘
 
-> **"Software excellence is achieved when security, performance, and maintainability converge."**
-> *"A excelência de software é alcançada quando segurança, performance e manutenibilidade convergem."*
-
-![PHP](https://img.shields.io/badge/Language-PHP_8.x-777bb3?style=for-the-badge&logo=php)
-![Architecture](https://img.shields.io/badge/Focus-Clean_Architecture-blue?style=for-the-badge)
-![Stability](https://img.shields.io/badge/Standard-High_Availability-green?style=for-the-badge)
-
----
-
-## 📖 Resumo / Overview
-
-**PT-BR:** O `robust-php-core` é uma implementação de referência em PHP puro (Vanilla), projetada para sistemas que exigem integridade de dados e estabilidade operacional. Este projeto demonstra como construir uma base de código modular e resiliente, focando em padrões de design (Design Patterns) e eliminando a dependência de frameworks externos para garantir performance máxima e soberania técnica.
-
-**EN-US:** `robust-php-core` is a reference implementation in Vanilla PHP designed for systems requiring data integrity and operational stability. This project demonstrates how to build a modular and resilient codebase, focusing on Design Patterns and eliminating framework overhead to ensure maximum performance and technical sovereignty.
+<p align="center">
+  <img src="https://img.shields.io/badge/PHP-8.3-777BB4?style=for-the-badge&logo=php&logoColor=white" alt="PHP 8.3">
+  <img src="https://img.shields.io/badge/Framework-Laravel%2011%20|%20Octane-ff2d20?style=for-the-badge&logo=laravel&logoColor=white" alt="Laravel Octane">
+  <img src="https://img.shields.io/badge/Runtime-Swoole-ff6c37?style=for-the-badge" alt="Swoole">
+  <img src="https://img.shields.io/badge/Architecture-Hexagonal-blue?style=for-the-badge" alt="Architecture">
+</p>
 
 ---
 
-## 🛠️ Pilares de Engenharia / Core Engineering Pillars
+### 🌐 Overview | Visão Geral do Ecossistema
 
-| Feature | Descrição Técnica (PT) | Technical Description (EN) |
+**EN:** **Octane-Bit-Engine** is more than a boilerplate; it is a high-performance execution engine designed for sub-millisecond response times in distributed environments. It demonstrates the convergence of **Advanced Software Engineering** (Clean Architecture), **Computer Science** (Bitwise Algorithms), and **Modern Runtimes** (Swoole/Octane), creating a robust foundation for financial systems and high-traffic APIs.
+
+**PT:** O **Octane-Bit-Engine** é mais que um boilerplate; é um motor de execução de alta performance projetado para tempos de resposta sub-milissegundos em ambientes distribuídos. Ele demonstra a convergência de **Engenharia de Software Avançada** (Arquitetura Limpa), **Ciência da Computação** (Algoritmos Bitwise) e **Runtimes Modernos** (Swoole/Octane), criando uma base robusta para sistemas financeiros e APIs de alto tráfego.
+
+---
+
+## 💡 Proposta de Valor | Value Proposition
+
+### Por que este projeto é disruptivo? | Why is this project disruptive?
+
+**1. Break the FPM Cycle:** Traditional PHP-FPM destroys and rebuilds the application state on every request. **Octane-Bit-Engine** stays in memory, utilizing **Connection Pooling** for databases and keeping the Dependency Injection container "warm" for instant execution.
+
+**2. Low-Level Efficiency in a High-Level Language:**
+By implementing **Bitwise Flag Management**, we handle complex permission matrices and system states using integer math instead of heavy relational lookups or object-heavy arrays, optimizing L1/L2 cache usage in the CPU.
+
+**3. Infrastructure-Agnostic Core:**
+The business logic is strictly decoupled. You can swap the delivery mechanism (API, CLI, RoadRunner) or the persistence layer without touching the core `04-business-domain-logic`.
+
+---
+
+## 🏗️ Pilares de Engenharia | Engineering Pillars
+
+### 🧠 Performance & Memory Strategy
+* **Bitwise Operations:** Utilização de operadores binários para compactação de dados. Ex: Gerenciar 32 permissões de usuário em um único campo `integer` de 4 bytes.
+* **Big O Awareness:** Estruturas de dados selecionadas para garantir que o crescimento da massa de dados não degrade a latência (foco em $O(1)$).
+* **Garbage Collector Tuning:** Estratégias para minimizar ciclos de GC em processos de longa duração (Long-running processes).
+
+### 🛡️ Security-First Architecture
+* **Cryptographic Rigor:** Implementação de **AES-256-GCM** (Authenticated Encryption), garantindo não apenas o sigilo, mas a integridade dos dados cifrados.
+* **Mass Assignment Defense:** Uso estrito de **DTOs (Data Transfer Objects)** e **Value Objects** para impedir vulnerabilidades de atribuição em massa.
+* **Input Sanitization:** Camada de defesa ativa contra injeção em todos os pontos de entrada (API/CLI).
+
+---
+
+## 📂 Arquitetura do Projeto | Project Structure
+
+A organização numerada reflete o fluxo de dependência (Camadas externas não podem afetar o Core):
+
+* **`1-kernel-and-autoloader`**: O "Coração". Bootstrapping de alta performance, tratamento de erros resiliente e registro de Service Providers.
+* **`02-service-abstraction-and-di`**: O "Cérebro". Abstração total de contratos via Interfaces. Implementa o **Dependency Inversion Principle (DIP)**.
+* **`03-data-persistence-mysql`**: A "Memória". Camada PDO otimizada. Foco em transações atômicas e performance bruta em queries SQL.
+* **`04-business-domain-logic`**: O "Espírito". Lógica pura. Nada de frameworks aqui. Apenas regras que ditam como o negócio funciona.
+* **`05-utility-and-helpers`**: As "Ferramentas". Utilitários de sistema, manipulação de buffers e segurança criptográfica.
+* **`06-infrastructure-services`**: Os "Braços". Integrações externas (AWS SDK, Mailers, RabbitMQ). Onde o motor se conecta ao mundo.
+* **`07-frontend-integration`**: A "Voz". Transformadores de saída, serialização JSON otimizada e adapters de interface.
+* **`08-api-and-routing`**: Os "Sentidos". Orquestração de rotas ultra-veloz via `FastRoute` e gestão de Middlewares.
+* **`09-quality-and-testing`**: O "Escudo". Testes de Mutação (`Infection`), Testes de Arquitetura e TDD rigoroso.
+
+---
+
+## 🛠️ Stack Tecnológica de Elite
+
+| Categoria | Tecnologia | Diferencial Técnico |
 | :--- | :--- | :--- |
-| **Data Integrity** | Tipagem estrita e validação de inputs. | Strict typing and input validation. |
-| **Modular Design** | Arquitetura desacoplada e reutilizável. | Decoupled and reusable architecture. |
-| **Clean Architecture** | Separação entre lógica e infraestrutura. | Decoupled logic and infrastructure. |
-| **Modern Crypto** | Wrapper para AES-256-GCM. | Wrapper for AES-256-GCM. |
-| **Performance** | Zero overhead (Vanilla PHP). | Zero overhead (Vanilla PHP). |
+| **Engine** | **PHP 8.3 (JIT Enabled)** | Uso de Just-In-Time compilation para tarefas intensivas de CPU. |
+| **High-Perf** | **Swoole / Octane** | Corrotinas para I/O assíncrono e paralelismo real. |
+| **Framework** | **Laravel 11 / Symfony** | Apenas os componentes essenciais para máxima agilidade. |
+| **Testing** | **Pest PHP & Infection** | Testes de mutação para garantir que os testes são à prova de falhas. |
+| **Static Analysis** | **PHPStan Lvl 9** | Máximo rigor de tipagem, eliminando `null pointer exceptions`. |
 
 ---
 
-## 📂 Estrutura do Projeto / Project Structure
+## 👨‍💻 Author | Autoria
+**Kauan Oliveira** - *Systems & Security Engineer*
 
-A organização segue os princípios de separação de responsabilidades (SoC), numerada para facilitar a auditoria e o desenvolvimento modular:
+**EN:** Specialist in high-availability systems, performance tuning, and technical sovereignty. Focused on building backends that don't just work, but scale with engineering precision.  
+**PT:** Especialista em sistemas de alta disponibilidade, tuning de performance e soberania técnica. Focado em construir backends que não apenas funcionam, mas escalam com precisão de engenharia.
 
-1. 📁 **[`01-kernel-and-autoloader`](./01-kernel-and-autoloader):** Core do sistema, gerenciamento de erros (Exception Handling) e Autoload dinâmico.
-2. 📁 **[`02-service-abstraction-and-di`](./02-service-abstraction-and-di):** Service Container, Injeção de Dependência e contratos de interface.
-3. 📁 **[`03-data-persistence-mysql`](./03-data-persistence-mysql):** Camada de persistência. Abstração PDO, Repository Pattern e gestão de conexões SQL.
-4. 📁 **[`04-business-domain-logic`](./04-business-domain-logic):** O coração da aplicação. Entidades e serviços que definem as regras de negócio.
-5. 📁 **[`05-utility-and-helpers`](./05-utility-and-helpers):** Componentes auxiliares: manipuladores de strings, datas, e ferramentas de log de sistema.
-6. 📁 **[`06-infrastructure-services`](./06-infrastructure-services):** Integração com serviços externos, envio de e-mails, drivers de fila ou sistemas de arquivos.
-7. 📁 **[`07-frontend-integration`](./07-frontend-integration):** Ponte de comunicação entre o backend e interfaces (API JSON ou SSR).
-8. 📁 **[`08-api-and-routing`](./08-api-and-routing):** Controlador de rotas, middlewares e gerenciamento de requisições HTTP.
-9. 📁 **[`09-quality-and-testing`](./09-quality-and-testing):** Suíte de testes unitários e de integração para garantir a estabilidade do código.
+### 📩 Contact / Contato
+- **LinkedIn:** [Kauan Oliveira](https://www.linkedin.com/in/kauan-oliveira-324264378/)
+- **GitHub:** [kauandias747474-hue](https://github.com/kauandias747474-hue)
 
 ---
-
-## 👨‍💻 Autor / Author
-**Kauan Oliveira** - *Software Engineer*
-
-- **LinkedIn:** [Kauan Oliveira](https://www.linkedin.com/in/kauan-oliveira-119934336/)
-- **Upwork:** [Kauan O. - Freelancer](https://www.upwork.com/freelancers/~01ad97279bec18a667)
-
----
-*"Construindo sistemas com soberania técnica e excelência em engenharia."*
-*Developed in 2026 by Kauan Oliveira*
+*Developed for Mission-Critical Environments | 2026*
