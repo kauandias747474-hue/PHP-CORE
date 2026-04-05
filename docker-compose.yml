@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  # O Motor Principal (Octane + Swoole)
+  php-core-engine:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    container_name: php-core-app
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/var/www/html
+    networks:
+      - core-network
+    depends_on:
+      - mysql-persistence
+      - redis-cache
+
+  # Banco de Dados de Missão Crítica
+  mysql-persistence:
+    image: mysql:8.0
+    container_name: mysql-db
+    environment:
+      MYSQL_DATABASE: php_core_db
+      MYSQL_ROOT_PASSWORD: root_password
+    ports:
+      - "3306:3306"
+    networks:
+      - core-network
+
+  # Cache de Alta Velocidade
+  redis-cache:
+    image: redis:7-alpine
+    container_name: redis-cache
+    networks:
+      - core-network
+
+  # Emulação Cloud (S3/SQS/SNS)
+  localstack-aws:
+    image: localstack/localstack
+    container_name: local-aws
+    ports:
+      - "4566:4566"
+    environment:
+      - SERVICES=s3,sqs,sns
+    networks:
+      - core-network
+
+networks:
+  core-network:
+    driver: bridge
