@@ -1,0 +1,75 @@
+name: 🚀 PHP-CORE CI/CD Pipeline
+
+on:
+  push:
+    branches: [ "main", "develop" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  # JOB 1: Análise Estática e Segurança (O filtro de qualidade)
+  quality-and-security:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP 8.3
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mbstring, bcmath, swoole, gd, pdo_mysql
+          tools: phpstan, psalm, composer
+
+      - name: Install Dependencies
+        run: composer install --no-progress --prefer-dist --optimize-autoloader
+
+      - name: 🧠 Static Analysis (PHPStan Lvl 9)
+        run: vendor/bin/phpstan analyse --level=9 app/
+
+      - name: 🔍 Security Vulnerability Scan (Snyk)
+        uses: snyk/actions/php@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+  # JOB 2: Testes de Unidade, Integração e Mutação
+  backend-tests:
+    needs: quality-and-security
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: engine_test
+        ports:
+          - 3306:3306
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP 8.3
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: swoole, pdo_mysql
+          tools: pest
+
+      - name: 🧪 Unit & Feature Tests (Pest PHP)
+        run: vendor/bin/pest --parallel --coverage
+
+      - name: 🧬 Mutation Testing (Infection)
+        run: vendor/bin/infection --threads=4 --min-msi=80
+        # Isto prova que os teus testes são realmente eficazes!
+
+  # JOB 3: Validação de Arquitetura (Compliance com Hexagonal)
+  architecture-check:
+    needs: backend-tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: 🏗️ Verify Hexagonal Architecture Rules
+        run: vendor/bin/pest --filter ArchitectureTest
