@@ -33,9 +33,9 @@
 
 | Conceito / Concept | Descrição / Description (PT-BR) | Description (EN-US) |
 | :--- | :--- | :--- |
-| ** Testabilidade / Testability** | Facilita a substituição de serviços reais por "Mocks" ou objetos falsos em testes unitários, isolando a lógica de negócio. | Facilitates replacing real services with "Mocks" or fake objects in unit tests, isolating the business logic. |
-| ** Flexibilidade / Flexibility** | Permite trocar implementações (ex: de E-mail para SMS) alterando apenas uma única linha de código dentro do Container. | Allows swapping implementations (e.g., from Email to SMS) by changing just a single line of code inside the Container. |
-| ** Manutenibilidade / Maintainability** | Mantém o código limpo, organizado e fiel aos princípios **SOLID**, especialmente o Princípio de Inversão de Dependência. | Keeps the code clean, organized, and faithful to **SOLID** principles, especially the Dependency Inversion Principle. |
+| **Testabilidade / Testability** | Facilita a substituição de serviços reais por "Mocks" ou objetos falsos em testes unitários, isolando a lógica de negócio. | Facilitates replacing real services with "Mocks" or fake objects in unit tests, isolating the business logic. |
+| **Flexibilidade / Flexibility** | Permite trocar implementações (ex: de E-mail para SMS) alterando apenas uma única linha de código dentro do Container. | Allows swapping implementations (e.g., from Email to SMS) by changing just a single line of code inside the Container. |
+| **Manutenibilidade / Maintainability** | Mantém o código limpo, organizado e fiel aos princípios **SOLID**, especialmente o Princípio de Inversão de Dependência. | Keeps the code clean, organized, and faithful to **SOLID** principles, especially the Dependency Inversion Principle. |
 
 ---
 
