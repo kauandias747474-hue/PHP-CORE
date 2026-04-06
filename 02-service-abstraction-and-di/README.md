@@ -1,6 +1,6 @@
-# 📁 02-service-abstraction-and-di
+#  02 service abstraction and di
 
-## 📖 Descrição / Description
+##  Descrição / Description
 
 **PT-BR:** Este módulo implementa um sistema de **Inversão de Controle (IoC)** e **Injeção de Dependência (DI)** manual em PHP. O objetivo é desacoplar a lógica de negócio das implementações de infraestrutura, utilizando um `Service Container` para gerenciar a criação e o ciclo de vida dos objetos.
 
@@ -17,7 +17,7 @@
 
 ---
 
-## 📂 Estrutura de Arquivos / File Structure
+##  Estrutura de Arquivos / File Structure
 
 | Pasta / Folder | Arquivo / File | Descrição / Description |
 | :--- | :--- | :--- |
@@ -31,7 +31,7 @@
 
 ---
 
-## 🚀 Benefícios / Benefits
+##  Benefícios / Benefits
 
 | Conceito / Concept | Descrição / Description (PT-BR) | Description (EN-US) |
 | :--- | :--- | :--- |
@@ -41,7 +41,7 @@
 
 ---
 
-## 🧩 Integração & Lógica / Integration & Logic
+##  Integração & Lógica / Integration & Logic
 
 **PT-BR:** A "mágica" deste projeto acontece na resolução automática de dependências. O fluxo segue uma hierarquia inteligente:
 1. **Mapeamento:** No `index.php`, registramos qual classe real deve responder a cada interface.
@@ -57,7 +57,7 @@
 
 ---
 
-## 💡 Por que este projeto é interessante? / Why is this project interesting?
+## Por que este projeto é interessante? / Why is this project interesting?
 
 **PT-BR:**
 Este projeto é fascinante porque toca no coração da engenharia de software moderna:
@@ -71,9 +71,28 @@ This project is fascinating because it touches the heart of modern software engi
 * **Framework Mastery:** Building a container manually provides clarity on how major tools (Laravel/Symfony) work "under the hood".
 * **Professional Code:** It marks the transition from a "script writer" to a "systems architect".
 
+##  Ecossistema & Ferramentas Sugeridas / Ecosystem & Suggested Tools
+
+**PT-BR:**
+Embora este projeto utilize um container manual para fins de aprendizado, no mercado de trabalho utilizamos ferramentas consagradas e padrões que seguem estes mesmos princípios para escalar aplicações:
+
+* **Composer:** Essencial para o gerenciamento de pacotes e o funcionamento do **Autoload PSR-4**, conectando os Namespaces às pastas físicas e eliminando a necessidade de `require` manuais.
+* **PHP-DI:** Um framework especializado que permite implementar a injeção de dependência via **Auto-wiring** (resolução automática), eliminando o mapeamento manual de cada classe.
+* **Frameworks (Laravel & Symfony):** Exemplos de implementação em larga escala. O Laravel utiliza **Service Providers** para gerenciar dependências, enquanto o Symfony foca em componentes de alta performance e desacoplamento.
+* **PHPUnit:** Fundamental para a criação de **testes unitários**. A injeção de dependência facilita o uso de **Mocks** (objetos simulados), permitindo testar a lógica de negócio sem disparar e-mails ou logs reais.
+* **PSR-11:** Este projeto visa a compatibilidade com a interface padrão de containers do PHP, garantindo que o Container siga os padrões universais estabelecidos pelo PHP-FIG.
+
+**EN-US:**
+While this project uses a manual container for learning purposes, professional projects use established tools and standards following these same principles to scale applications:
+
+* **Composer:** Essential for package management and **PSR-4 Autoloading**, linking Namespaces to physical directories and eliminating the need for manual `requires`.
+* **PHP-DI:** A specialized framework to implement dependency injection via **Auto-wiring** (automatic resolution), removing the need for manual mapping of every class.
+* **Frameworks (Laravel & Symfony):** Examples of large-scale implementations. Laravel uses **Service Providers** to manage dependencies, while Symfony focuses on high-performance components and decoupling.
+* **PHPUnit:** Crucial for **unit testing**. Dependency Injection facilitates the use of **Mocks** (simulated objects), allowing business logic to be tested without firing real emails or logs.
+* **PSR-11:** This project aims to be compatible with the standard PHP container interface, ensuring the Container follows universal standards established by the PHP-FIG.
 ---
 
-## 🛠️ Fundamentos Técnicos / Technical Foundations
+##  Fundamentos Técnicos / Technical Foundations
 
 | Conceito / Concept | Descrição / Description |
 | :--- | :--- |
