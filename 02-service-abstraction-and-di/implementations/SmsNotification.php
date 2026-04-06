@@ -1,4 +1,4 @@
-<php
+<?php
 
 namespace App\Implementations;
 use App\Contracts\INotificationService;
