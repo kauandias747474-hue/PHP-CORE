@@ -1,106 +1,74 @@
-#  02) Service Abstraction and Di
+# 2)Service Abstraction & Dependency Injection 
 
-##  Descrição / Description
+## Descricao / Description
 
-**PT-BR:** Este módulo implementa um sistema de **Inversão de Controle (IoC)** e **Injeção de Dependência (DI)** manual em PHP. O objetivo é desacoplar a lógica de negócio das implementações de infraestrutura, utilizando um `Service Container` para gerenciar a criação e o ciclo de vida dos objetos.
+**PT-BR:** Este modulo foca na implementacao de um Service Container manual para gerenciar a Inversao de Controle (IoC). O objetivo principal foi transformar um codigo rigido em uma arquitetura flexivel, onde as classes nao sabem como seus servicos sao criados, apenas o que eles fazem.
 
-**EN-US:** This module implements a manual **Inversion of Control (IoC)** and **Dependency Injection (DI)** system in PHP. The goal is to decouple business logic from infrastructure implementations by using a `Service Container` to manage object creation and lifecycle.
-
----
-
-## 🛠️ Conceitos Aplicados / Applied Concepts
-
-* **DIP (Dependency Inversion Principle):** As classes dependem de interfaces (`contracts/`), não de implementações concretas.
-* **Dependency Injection (DI):** Dependências são injetadas via construtor, facilitando testes e manutenção.
-* **Service Container:** Centraliza a "receita" de criação dos serviços em um único lugar.
-* **PSR-4 Autoloading:** Gerenciamento automático de classes via Composer e Namespaces.
+**EN-US:** This module focuses on implementing a manual Service Container to manage Inversion of Control (IoC). The main goal was to transform rigid code into a flexible architecture, where classes don't know how their services are created, only what they do.
 
 ---
 
-##  Estrutura de Arquivos / File Structure
+## Arquitetura e Arquivos / Architecture & Files
 
-| Pasta / Folder | Arquivo / File | Descrição / Description |
+| Arquivo / File | Camada / Layer | Responsabilidade / Responsibility |
 | :--- | :--- | :--- |
-| `src/contracts/` | `ILogger.php` | Interface de Log / Logging Interface |
-| `src/contracts/` | `INotificationService.php` | Interface de Notificação / Notification Interface |
-| `src/implementations/` | `ConsoleLogger.php` | Log via Terminal / Terminal Logging |
-| `src/implementations/` | `EmailNotification.php` | Notificação via E-mail / E-mail Notification |
-| `src/container/` | `ServiceContainer.php` | O motor do DI / The DI Engine |
-| `root` | `index.php` | Ponto de entrada (União de tudo) / Entry point |
-| `root` | `composer.json` | Configuração de Autoload / Autoload Setup |
+| ILogger.php | Contracts | Interface que define o metodo de log. / Interface defining the log method. |
+| INotificationService.php | Contracts | Interface para servicos de envio. / Interface for delivery services. |
+| FileLogger.php | Implementations | Gera logs com Request ID unico para rastreamento. / Generates logs with unique Request ID for tracing. |
+| EmailNotification.php | Implementations | Envio de e-mail com validacao de sintaxe. / Email delivery with syntax validation. |
+| SmsNotification.php | Implementations | Envio de SMS com sanitizacao de numeros (Regex). / SMS delivery with number sanitization (Regex). |
+| ServiceContainer.php | Core | O motor que resolve as dependencias via Closures. / The engine resolving dependencies via Closures. |
+| main.php | Entry Point | Execucao dinamica baseada em parametros da URL. / Dynamic execution based on URL parameters. |
 
 ---
 
-##  Benefícios / Benefits
+## Funcionalidades Implementadas (Feats) / Key Features
 
-| Conceito / Concept | Descrição / Description (PT-BR) | Description (EN-US) |
-| :--- | :--- | :--- |
-| **Testabilidade / Testability** | Facilita a substituição de serviços reais por "Mocks" em testes unitários. | Facilitates replacing real services with "Mocks" in unit tests. |
-| **Flexibilidade / Flexibility** | Permite trocar implementações (ex: E-mail para SMS) alterando apenas uma linha no Container. | Allows swapping implementations (e.g., Email to SMS) by changing one line in the Container. |
-| **Manutenibilidade / Maintainability** | Mantém o código limpo e fiel aos princípios **SOLID**. | Keeps the code clean and faithful to **SOLID** principles. |
+### 1. Rastreabilidade (Request ID)
+O FileLogger identifica cada execucao com um ID unico (ex: [REQ-a1b2c]). Isso permite filtrar logs de uma mesma requisicao em ambientes de alto trafego.
 
----
+### 2. Sanitizacao de Dados (SMS Clean)
+O SmsNotification utiliza expressoes regulares (preg_replace) para limpar o numero do destinatario, aceitando formatos como (11) 99999-8888 e convertendo para 11999998888.
 
-##  Integração & Lógica / Integration & Logic
+### 3. Validacao de Negocio (Email Guard)
+Adicionada uma camada de protecao no EmailNotification que impede o envio caso o endereco de e-mail nao contenha o caractere @.
 
-**PT-BR:** A "mágica" deste projeto acontece na resolução automática de dependências. O fluxo segue uma hierarquia inteligente:
-1. **Mapeamento:** No `index.php`, registramos qual classe real deve responder a cada interface.
-2. **Resolução:** Ao solicitar o `EmailNotification`, o Container percebe que ele exige um `ILogger`.
-3. **Injeção:** O Container instancia o `ConsoleLogger` e o "injeta" no construtor da notificação automaticamente.
-4. **Desacoplamento:** O serviço de e-mail funciona sem saber se o log vai para o console ou banco de dados.
-
-**EN-US:** The "magic" happens in automatic dependency resolution. The flow follows an intelligent hierarchy:
-1. **Mapping:** In `index.php`, we register which real class should respond to each interface.
-2. **Resolution:** When requesting `EmailNotification`, the Container notices it requires an `ILogger`.
-3. **Injection:** The Container instantiates `ConsoleLogger` and "injects" it into the notification constructor automatically.
-4. **Decoupling:** The email service works without knowing if the log goes to the console or a database.
+### 4. Alternancia Dinamica
+O main.php foi refatorado para ler parametros via $_GET. Agora e possivel testar diferentes implementacoes apenas mudando a URL:
+* ?tipo=sms -> Injeta o servico de SMS.
+* ?tipo=email -> Injeta o servico de E-mail.
 
 ---
 
-## Por que este projeto é interessante? / Why is this project interesting?
+## Fundamentos Tecnicos / Technical Foundations
 
 **PT-BR:**
-Este projeto é fascinante porque toca no coração da engenharia de software moderna:
-* **Liberdade de Escolha:** O código não fica "preso" a uma ferramenta. Posso trocar componentes sem tocar na regra de negócio.
-* **Domínio do Framework:** Criar um container manualmente traz clareza sobre como grandes ferramentas (Laravel/Symfony) funcionam "sob o capô".
-* **Código Profissional:** Marca a transição de um "escritor de scripts" para um "arquiteto de sistemas".
+A transicao de instanciar classes manualmente para solicitar ao Container e o divisor de aguas entre um script simples e um sistema profissional. Durante este modulo, superamos desafios tecnicos:
+* PSR-4 Autoloading: Configuracao do Composer para mapear namespaces e pastas.
+* Strict Typing: Correcao de erros de compatibilidade de interface (: string) e cumprimento de contratos.
+* Desacoplamento: Capacidade de trocar o Logger ou o Servico de Notificacao sem alterar as classes de negocio.
 
 **EN-US:**
-This project is fascinating because it touches the heart of modern software engineering:
-* **Freedom of Choice:** Code isn't "trapped" by a tool. I can swap components without touching business rules.
-* **Framework Mastery:** Building a container manually provides clarity on how major tools (Laravel/Symfony) work "under the hood".
-* **Professional Code:** It marks the transition from a "script writer" to a "systems architect".
+Moving from manually instantiating classes to requesting from the Container is the turning point between a simple script and a professional system. During this module, we overcame technical challenges:
+* PSR-4 Autoloading: Composer setup to map namespaces and directories.
+* Strict Typing: Fixing interface compatibility errors (: string) and enforcing contracts.
+* Decoupling: The ability to swap the Logger or Notification Service without changing business classes.
 
-##  Ecossistema & Ferramentas Sugeridas / Ecosystem & Suggested Tools
-
-**PT-BR:**
-Embora este projeto utilize um container manual para fins de aprendizado, no mercado de trabalho utilizamos ferramentas consagradas e padrões que seguem estes mesmos princípios para escalar aplicações:
-
-* **Composer:** Essencial para o gerenciamento de pacotes e o funcionamento do **Autoload PSR-4**, conectando os Namespaces às pastas físicas e eliminando a necessidade de `require` manuais.
-* **PHP-DI:** Um framework especializado que permite implementar a injeção de dependência via **Auto-wiring** (resolução automática), eliminando o mapeamento manual de cada classe.
-* **Frameworks (Laravel & Symfony):** Exemplos de implementação em larga escala. O Laravel utiliza **Service Providers** para gerenciar dependências, enquanto o Symfony foca em componentes de alta performance e desacoplamento.
-* **PHPUnit:** Fundamental para a criação de **testes unitários**. A injeção de dependência facilita o uso de **Mocks** (objetos simulados), permitindo testar a lógica de negócio sem disparar e-mails ou logs reais.
-* **PSR-11:** Este projeto visa a compatibilidade com a interface padrão de containers do PHP, garantindo que o Container siga os padrões universais estabelecidos pelo PHP-FIG.
-
-**EN-US:**
-While this project uses a manual container for learning purposes, professional projects use established tools and standards following these same principles to scale applications:
-
-* **Composer:** Essential for package management and **PSR-4 Autoloading**, linking Namespaces to physical directories and eliminating the need for manual `requires`.
-* **PHP-DI:** A specialized framework to implement dependency injection via **Auto-wiring** (automatic resolution), removing the need for manual mapping of every class.
-* **Frameworks (Laravel & Symfony):** Examples of large-scale implementations. Laravel uses **Service Providers** to manage dependencies, while Symfony focuses on high-performance components and decoupling.
-* **PHPUnit:** Crucial for **unit testing**. Dependency Injection facilitates the use of **Mocks** (simulated objects), allowing business logic to be tested without firing real emails or logs.
-* **PSR-11:** This project aims to be compatible with the standard PHP container interface, ensuring the Container follows universal standards established by the PHP-FIG.
 ---
 
-##  Fundamentos Técnicos / Technical Foundations
+## Como Testar / How to Test
 
-| Conceito / Concept | Descrição / Description |
-| :--- | :--- |
-| **Abstração (Interfaces)** | Define **o que** deve ser feito, ignorando o **como**. |
-| **Injeção de Dependência (DI)** | Técnica de passar dependências via construtor (New is Glue). |
-| **Service Container** | Objeto central que gerencia a criação e árvores de dependência. |
+1. No terminal, atualize o autoload:
+   php composer.phar dump-autoload -o
 
-```php
-// Exemplo de configuração no index.php / Setup example
-$container->bind(ILogger::class, fn() => new ConsoleLogger());
-$container->bind(INotificationService::class, fn($c) => new EmailNotification($c->get(ILogger::class)));
+2. Inicie o PHP Server:
+   php -S localhost:8000
+
+3. Teste os diferentes servicos via URL:
+   - SMS: http://localhost:8000/main.php?tipo=sms&mensagem=Teste_SMS
+   - Email: http://localhost:8000/main.php?tipo=email&mensagem=Teste_Email
+
+---
+
+## Conclusao / Conclusion
+Este projeto solidifica os principios SOLID, especialmente o DIP (Dependency Inversion Principle), preparando a base para o desenvolvimento em frameworks modernos como Laravel e Symfony.
