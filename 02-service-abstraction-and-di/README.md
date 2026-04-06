@@ -39,7 +39,7 @@
 
 ---
 
-> ** Nota Técnica / Technical Note:** > Ao utilizar esta abordagem, sua aplicação deixa de ser um bloco rígido de código e passa a ser um conjunto de peças modulares que podem ser atualizadas de forma independente.
+> **Nota Técnica / Technical Note:** > Ao utilizar esta abordagem, sua aplicação deixa de ser um bloco rígido de código e passa a ser um conjunto de peças modulares que podem ser atualizadas de forma independente.
 > 
 > By using this approach, your application stops being a rigid block of code and becomes a set of modular pieces that can be updated independently.
 > 
