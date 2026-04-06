@@ -1,0 +1,9 @@
+{
+    "name": "seu-nome/projeto-di",
+    "description": "Estudo de Abstração e Injeção de Dependência",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    }
+}
