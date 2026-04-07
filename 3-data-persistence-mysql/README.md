@@ -1,70 +1,83 @@
-# 📁 03-infrastructure-persistence
+#  03) Data Persistence MySql
 
-## 📖 Descrição / Description
+##  Descrição / Description
 
-**PT-BR:** Esta camada é a implementação concreta de todos os recursos externos do sistema. Enquanto a camada anterior define "o que" deve ser feito através de interfaces, esta camada lida com o "como" fazer, isolando detalhes tecnológicos como drivers de banco de dados (MySQL), clientes HTTP e sistemas de arquivos.
-**EN-US:** This layer is the concrete implementation of all external system resources. While the previous layer defines "what" should be done through interfaces, this layer handles the "how" to do it, isolating technical details such as database drivers (MySQL), HTTP clients, and file systems.
+**PT-BR:** Este módulo representa a camada de infraestrutura completa do sistema. Ele é responsável por gerenciar a persistência em **MySQL**, logs de sistema e integrações com APIs externas (Stripe). A arquitetura foi desenhada para ser resiliente, utilizando Injeção de Dependência e o padrão Repository para isolar a lógica de negócio dos detalhes técnicos de IO (Entrada e Saída).
 
----
-
-## 📡 Serviços e Integrações / Services & Integrations
-
-### 1. Persistence & Transaction Manager
-**PT-BR:** Gestão de transações ACID e persistência real em MySQL utilizando PDO. Inclui um *Query Builder* para garantir segurança contra SQL Injection.
-**EN-US:** ACID transaction management and real MySQL persistence using PDO. Includes a Query Builder to ensure security against SQL Injection.
-
-### 2. Logging (PSR-3)
-**PT-BR:** Sistema de log multinível seguindo os padrões da comunidade (PSR-3), permitindo registrar eventos em arquivos locais ou serviços externos.
-**EN-US:** Multi-level logging system following community standards (PSR-3), allowing event logging to local files or external services.
-
-### 3. Resilient API Client
-**PT-BR:** Cliente HTTP para comunicação com APIs de terceiros, equipado com lógica de retry e tratamento de timeouts para garantir estabilidade.
-**EN-US:** HTTP client for communication with third-party APIs, equipped with retry logic and timeout handling to ensure stability.
-
-### 4. Cache System
-**PT-BR:** Abstração para suporte a múltiplos drivers como Redis ou File System, otimizando a performance da aplicação.
-**EN-US:** Abstraction supporting multiple drivers like Redis or File System, optimizing application performance.
+**EN-US:** This module represents the complete infrastructure layer of the system. It handles **MySQL** persistence, system logging, and external API integrations (Stripe). The architecture is designed for resilience, using Dependency Injection and the Repository pattern to isolate business logic from technical IO (Input/Output) details.
 
 ---
 
-## 📂 Estrutura de Pastas / Directory Structure
+##  Estrutura de Arquivos / File Structure
 
+###  External & Integration (APIs)
+* **`External/ApiClient.php`**: 
+    * **PT-BR:** Motor HTTP (cURL) genérico. Gerencia conexões, headers e bypass de SSL para ambiente Windows.
+    * **EN-US:** Generic HTTP engine (cURL). Manages connections, headers, and SSL bypass for Windows environments.
+* **`External/StripeProvider.php`**: 
+    * **PT-BR:** Provedor especializado que traduz comandos do sistema para o formato da API do Stripe.
+    * **EN-US:** Specialized provider that translates system commands into Stripe API format.
+* **`External/index.php`**: 
+    * **PT-BR:** Ponto de entrada (Maestro) que orquestra a Injeção de Dependência entre o Client e o Provider.
+    * **EN-US:** Entry point (Maestro) that orchestrates Dependency Injection between Client and Provider.
 
+### Database & Persistence (MySQL)
+* **`Database/MySqlConnection.php`**: Gerenciador da conexão PDO (Singleton/Manager).
+* **`Database/QueryBuilder.php`**: Abstração de SQL para garantir segurança contra SQL Injection.
+* **`Database/TransactionManager.php`**: Gestão de integridade ACID (Commit/Rollback).
+* **`Repositories/SqlOrderRepository.php` & `SqlUserRepository.php`**: Implementações que transformam registros do banco em objetos PHP.
 
-* **`Database/`**: 
-    * **PT-BR:** Conexão PDO, Transaction Manager e Query Builder.
-    * **EN-US:** PDO connection, Transaction Manager, and Query Builder.
-* **`Repositories/`**: 
-    * **PT-BR:** Implementações SQL dos contratos (ex: `SqlUserRepository.php`).
-    * **EN-US:** SQL implementations of contracts (e.g., `SqlUserRepository.php`).
-* **`External/`**: 
-    * **PT-BR:** Clientes para APIs externas e serviços de terceiros.
-    * **EN-US:** Clients for external APIs and third-party services.
-* **`Logging/`**: 
-    * **PT-BR:** Implementações reais de escrita de log (ex: `FileLogger.php`).
-    * **EN-US:** Actual log writing implementations (e.g., `FileLogger.php`).
+###  Logging & Utilities
+* **`Logging/FileLogger.php`**: Sistema de registro de eventos em arquivo (Padrão PSR-3).
+* **`bin/console.php` & `server.php`**: Utilitários de linha de comando e servidor local.
+* **`storage/Unit/clear_logs.php`**: Script de manutenção para limpeza de arquivos de log.
+
+###  Quality Assurance (Tests)
+* **`tests/Integration/OrderPersistenceTest.php`**: Valida o fluxo de salvar dados no MySQL.
+* **`tests/Integration/PaymentFlowTest.php`**: Testa o caminho completo: Cobrança -> Resposta da API -> Log de Erro/Sucesso.
 
 ---
 
-## 🚀 Benefícios de Engenharia / Engineering Benefits
+##  Relatório de Engenharia / Engineering Report
 
-* **Isolamento Tecnológico (Technological Isolation):** * **PT-BR:** O "Coração" do projeto não sabe que o MySQL existe, apenas que os dados são salvos.
-    * **EN-US:** The "Core" of the project doesn't know MySQL exists, only that data is saved.
-* **Flexibilidade (Flexibility):** * **PT-BR:** Trocar o MySQL por PostgreSQL exige mudanças apenas nesta pasta.
-    * **EN-US:** Switching from MySQL to PostgreSQL requires changes only in this folder.
-* **Segurança (Security):** * **PT-BR:** Centraliza a higienização de dados e proteção contra ataques de I/O.
-    * **EN-US:** Centralizes data sanitization and protection against I/O attacks.
+Durante o desenvolvimento deste módulo, enfrentamos e superamos desafios críticos de infraestrutura real:
+
+### 1. Desafios de Ambiente / Environment Challenges
+| Desafio / Challenge | Causa / Cause | Solução / Solution |
+| :--- | :--- | :--- |
+| **SSL Handshake Fail** | Windows/PHP sem certificados `cacert.pem`. | Bypass via `CURLOPT_SSL_VERIFYPEER => false` (Apenas Dev). |
+| **Antivirus (Avast) Block** | cURL detectado como comportamento suspeito. | Restauração via Quarentena e Exceção de Diretório. |
+| **Path/Require Errors** | Conflito com subpastas `/src` no ambiente local. | **Flat Structure:** Organização direta dos arquivos para evitar quebras. |
+| **HTTP 401 Unauthorized** | Chave de API inválida/teste. | Tratamento via `ApiClientException` (Erro 401 = Conexão física ativa). |
+
+
+
+### 2. Por que esta estrutura é interessante? / Why this structure?
+* **Resiliência:** O uso de `TransactionManager` garante que, se a internet cair após uma cobrança, o banco de dados não fique inconsistente (ACID).
+* **Desacoplamento:** O `StripeProvider` não sabe "fazer" internet; ele recebe o `ApiClient` pronto. Isso é **Injeção de Dependência** aplicada.
+* **Manutenibilidade:** Sem a pasta `src`, eliminamos complexidade de caminhos no Windows, tornando o projeto mais ágil para prototipagem e testes.
+
+
 
 ---
 
-## 🧪 Como Testar / How to Test
+##  Conceitos Aprendidos / Concepts Learned
 
-**PT-BR:** Você pode validar esta camada garantindo que as classes aqui implementam as interfaces da camada `02`. Se você conseguir instanciar um `SqlUserRepository` e passá-lo para um serviço que espera um `IUserRepository`, a integração está perfeita.
-**EN-US:** You can validate this layer by ensuring the classes here implement the interfaces from layer `02`. If you can instantiate a `SqlUserRepository` and pass it to a service expecting an `IUserRepository`, the integration is perfect.
+* **Injeção de Dependência (DI):** Inverter o controle para tornar as classes testáveis.
+* **Gestão de Transações:** Entender a importância do Commit/Rollback em fluxos financeiros.
+* **Abstração de API:** Criar um "Motor" (Client) que serve para qualquer API futura.
+* **Segurança de Dados:** Uso de Query Builders para blindar o banco contra ataques.
 
-## 🔄 Exemplo de Fluxo / Example Flow
+---
 
-1. **Core** solicita: `userRepository->save($user)` (sem saber como).
-2. **Infrastructure (Esta camada)** recebe o pedido através da implementação `SqlUserRepository`.
-3. **SqlUserRepository** utiliza o `QueryBuilder` e a `MySqlConnection` para executar o SQL.
-4. O dado é persistido no **MySQL**.
+##  Como Testar / How to Test
+
+**PT-BR:**
+1. Navegue até a pasta desejada (ex: `External/` ou `tests/`).
+2. Execute: `php index.php` ou `php PaymentFlowTest.php`.
+3. Um erro **401** no console é um sinal de **Sucesso Técnico**: indica que a comunicação atravessou todas as camadas de software e hardware com sucesso.
+
+**EN-US:**
+1. Navigate to the desired folder (e.g., `External/` or `tests/`).
+2. Run: `php index.php` or `php PaymentFlowTest.php`.
+3. A **401** error in the console is a sign of **Technical Success**: it indicates that communication successfully passed through all software and hardware layers.
