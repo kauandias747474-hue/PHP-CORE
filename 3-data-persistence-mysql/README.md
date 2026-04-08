@@ -37,20 +37,24 @@
 * **`tests/Integration/PaymentFlowTest.php`**: Testa o caminho completo: Cobrança -> Resposta da API -> Log de Erro/Sucesso.
 
 ---
+##  1. Relatório de Engenharia / Engineering Report
 
-##  Relatório de Engenharia / Engineering Report
+### Tabela de Desafios e Soluções / Challenges & Solutions Table
 
-Durante o desenvolvimento deste módulo, enfrentamos e superamos desafios críticos de infraestrutura real:
-
-### 1. Desafios de Ambiente / Environment Challenges
 | Desafio / Challenge | Causa / Cause | Solução / Solution |
 | :--- | :--- | :--- |
-| **SSL Handshake Fail** | Windows/PHP sem certificados `cacert.pem`. | Bypass via `CURLOPT_SSL_VERIFYPEER => false` (Apenas Dev). |
-| **Antivirus (Avast) Block** | cURL detectado como comportamento suspeito. | Restauração via Quarentena e Exceção de Diretório. |
-| **Path/Require Errors** | Conflito com subpastas `/src` no ambiente local. | **Flat Structure:** Organização direta dos arquivos para evitar quebras. |
-| **HTTP 401 Unauthorized** | Chave de API inválida/teste. | Tratamento via `ApiClientException` (Erro 401 = Conexão física ativa). |
+| **SQL Injection Risk** | Concatenação de variáveis em strings SQL. / Raw variables in SQL strings. | **Prepared Statements:** Sanitização profunda de entradas via PDO. / Deep input sanitization via PDO. |
+| **SSL Handshake Fail** | Ambiente local sem certificados de autoridade. / Local environment lacking authority certificates. | Configuração de certificados globais e tratamento de erros de transporte. / Global certificate setup and transport error handling. |
+| **Antivirus (Avast) Block** | Ferramentas de requisição detectadas como ameaças. / Request tools detected as threats. | Configuração de exceções e restauração de binários bloqueados. / Exception configuration and restoration of blocked binaries. |
+| **PHP Deprecated (8.2+)** | Uso de padrões antigos de declaração e datas. / Use of old declaration and date patterns. | **Strict Declaration:** Padronização de atributos e Timezones fixos. / Attribute standardization and fixed Timezones. |
+| **Connection Refused** | Falha de comunicação com o serviço MySQL local. / MySQL service communication failure. | **DSN Validation:** Validação de credenciais e integridade de portas. / Credential validation and port integrity. |
+| **Data Integrity Fail** | Conflitos em chaves estrangeiras (FK) e relacionamentos. / Foreign key and relationship conflicts. | **Transactions:** Implementação de operações atômicas (ACID). / Implementation of atomic operations (ACID). |
+| **Log File Bloat** | Arquivos de texto crescendo até o limite de memória. / Text files growing to memory limits. | **Daily Rotation:** Arquivamento automático por Ano e Mês. / Automatic archiving by Year and Month. |
+| **Race Conditions** | Processos paralelos tentando escrever no mesmo local. / Parallel processes writing to the same location. | **File Locking:** Travamento exclusivo durante operações de escrita. / Exclusive locking during write operations. |
+| **Path/Require Errors** | Inconsistência na árvore de diretórios local. / Local directory tree inconsistency. | **Flat Structure:** Simplificação do carregamento de arquivos. / File loading simplification. |
+| **Data Inconsistency** | Dados nulos ou estruturados quebrando o fluxo de log. / Null or structured data breaking log flow. | **Type Casting:** Tratamento rigoroso de tipos de entrada. / Rigorous input type handling. |
 
-
+---
 
 ### 2. Por que esta estrutura é interessante? / Why this structure?
 * **Resiliência:** O uso de `TransactionManager` garante que, se a internet cair após uma cobrança, o banco de dados não fique inconsistente (ACID).
