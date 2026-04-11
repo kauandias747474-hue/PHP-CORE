@@ -67,6 +67,8 @@
 | **White Screen of Death (WSOD)** | Falha silenciosa no PHP devido a erros de sintaxe ou exibição desligada. / Silent PHP failure due to syntax errors or error display being off. | **Error Reporting:** Implementação de `ini_set('display_errors', 1)` para debug em tempo real. / Enabling display_errors for real-time debugging. |
 | **Path Discrepancy (../ vs Absolute)** | Caminhos relativos falhando ao chamar scripts de diferentes níveis de pasta. / Relative paths failing when calling scripts from different directory levels. | **Absolute Path Mapping:** Uso de caminhos absolutos (`C:\Users\...`) no script do servidor. / Implementing absolute paths in the server script. |
 | **Functional Separation** | Mistura de código de interface (HTML) com código de comando (CLI). / Mixing UI code with CLI command code. | **Directory Decoupling:** Separação física entre arquivos de sistema (`/bin`) e arquivos públicos (`/public`). / Physical separation between system files and public assets. |
+| **Git Lock Management (Index.lock)** : Resolução de interrupções no versionamento causadas por processos concorrentes, através da remoção manual do arquivo de trava do Git. / Resolution of versioning interruptions caused by concurrent processes by manually removing the Git lock file. |
+
 
 ---
 
