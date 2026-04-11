@@ -105,6 +105,12 @@
 * **Documentação Viva (README as Log):** A manutenção deste relatório em paralelo ao código assegura que a curva de aprendizado sobre as portas e diretórios seja preservada para futuros desenvolvedores ou auditorias. / *Maintaining this report alongside the code ensures that the learning curve regarding ports and directories is preserved for future developers or audits.*
 
 ---
+### 5. Garantia de Qualidade / Quality Assurance (Integration Tests)
+
+* **OrderPersistenceTest:** Validação técnica da camada de persistência, garantindo a integridade dos dados inseridos no MySQL 3307. / *Technical validation of the persistence layer, ensuring data integrity in MySQL 3307.*
+* **PaymentFlowTest:** Teste de integração funcional que simula o ciclo de vida completo de uma transação: Requisição -> API Response -> Logging -> Database Update. / *Functional integration test simulating the complete transaction lifecycle.*
+---
+
 ##  Conceitos Aprendidos / Concepts Learned
 
 * **Injeção de Dependência (DI):** Inverter o controle para tornar as classes testáveis e independentes. / Inverting control to make classes testable and independent.
