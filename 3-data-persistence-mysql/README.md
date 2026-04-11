@@ -77,6 +77,18 @@
 * **Higiene de Versionamento (Git Identity & Commits):** A resolução da identidade do autor e o uso de commits granulares garantem que cada pequena vitória de hoje (porta, banco, repositórios) seja um ponto de restauração seguro e auditável. / *Resolving Git identity and using granular commits ensures every fix today is a safe, auditable restore point.*
 * **Validação Estrutural (Outline Mapping):** A persistência em manter o código limpo permitiu que a IDE (VS Code) mapeasse o projeto em tempo real, provando que uma boa arquitetura facilita a leitura humana e de ferramentas. / *Clean code persistence allowed the IDE to map the project in real-time, proving that good architecture aids both humans and tools.*
 
+### 3. Evolução da Arquitetura de Dados / Data Architecture Evolution
+
+* **Padrão Singleton (Singleton Pattern):** Implementação da classe `MySqlConnection` para gerenciar uma única instância de conexão, otimizando o uso de recursos do servidor. / *Implementation of the MySqlConnection class to manage a single connection instance, optimizing server resource usage.*
+* **Abstração via PDO (PDO Abstraction):** Uso de PHP Data Objects para garantir Prepared Statements, provendo segurança nativa contra SQL Injection no motor de clearing. / *Use of PHP Data Objects to ensure Prepared Statements, providing native security against SQL Injection in the clearing engine.*
+* **Tratamento de Exceções (Exception Handling):** Aplicação de blocos `try/catch` para capturar falhas de banco e fornecer feedback amigável ao usuário. / *Application of try/catch blocks to intercept database failures and provide user-friendly feedback.*
+
+### 4. Resolução de Conflitos de Ambiente / Environment Troubleshooting
+
+* **Acesso via Localhost (Localhost vs File Path):** Migração do projeto para a pasta `htdocs` para permitir que o Apache processe o PHP, resolvendo o erro de exibição de tags HTML como texto puro. / *Migration of the project to the htdocs folder to allow Apache to process PHP, resolving the error of displaying HTML tags as plain text.*
+* **Correção de Escopo Estático (Static Scope Fix):** Ajuste na declaração da propriedade `$instance` dentro da classe de conexão para evitar erros de execução em tempo real. / *Adjustment in the declaration of the $instance property within the connection class to avoid runtime execution errors.*
+* **Mapeamento de Diretórios (Virtual Root):** Reorganização da estrutura de pastas para facilitar a portabilidade do sistema de clearing entre diferentes ambientes de desenvolvimento. / *Reorganization of the folder structure to facilitate the portability of the clearing system between different development environments.*
+
 ---
 ##  Conceitos Aprendidos / Concepts Learned
 
