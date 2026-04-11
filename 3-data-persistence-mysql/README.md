@@ -68,7 +68,12 @@
 | **Path Discrepancy (../ vs Absolute)** | Caminhos relativos falhando ao chamar scripts de diferentes níveis de pasta. / Relative paths failing when calling scripts from different directory levels. | **Absolute Path Mapping:** Uso de caminhos absolutos (`C:\Users\...`) no script do servidor. / Implementing absolute paths in the server script. |
 | **Functional Separation** | Mistura de código de interface (HTML) com código de comando (CLI). / Mixing UI code with CLI command code. | **Directory Decoupling:** Separação física entre arquivos de sistema (`/bin`) e arquivos públicos (`/public`). / Physical separation between system files and public assets. |
 | **Git Lock Management (Index.lock)**|  Resolução de interrupções no versionamento causadas por processos concorrentes, através da remoção manual do arquivo de trava do Git. | **Git Lock Management (Index.lock)** Resolution of versioning interruptions caused by concurrent processes by manually removing the Git lock file. |
-
+| **IDE "Blindness" (P1009)** | Intelephense falhando ao indexar classes em tempo real. / IDE failing to index classes in real-time. | **DocBlock Type Hinting:** Uso de `@var` e comentários estruturados para guiar o motor de análise da IDE. / Using `@var` and structured comments to guide the IDE analysis engine. |
+| **Silent Logic Failures** | Falta de feedback visual em operações de terminal bem-sucedidas. / Lack of visual feedback for successful CLI operations. | **Visual Feedback (Emoji/Status):** Implementação de ícones de status (✅/❌/🚀) e relatórios de memória no console. / Implementing status icons and memory reporting in the console. |
+| **Class Collision** | Risco de nomes de classes iguais em projetos maiores. / Risk of class name collisions in larger projects. | **Namespacing (Future-Proofing):** Preparação da estrutura para uso de `namespace` e PSR-4. / Structural preparation for namespace and PSR-4 usage. |
+| **Memory Leak Risk** | Execução de loops extensos sem monitoramento de recursos. / Running extensive loops without resource monitoring. | **Performance Tracking:** Monitoramento do uso de memória (`memory_get_usage`) durante a execução. / Monitoring memory usage (`memory_get_usage`) during execution. |
+| **Manual Dependency Loading** | Excesso de `require_once` manuais aumentando a chance de erro humano. / Excessive manual `require_once` increasing chance of human error. | **Autoloading Strategy:** Planejamento para migração para Composer (PSR-4) para carga automática. / Planning migration to Composer (PSR-4) for automatic loading. |
+| **Git Lock Management (Index.lock)** | Resolução de interrupções no versionamento causadas por processos concorrentes. / Versioning interruptions caused by concurrent processes. | **Lock Clearing:** Remoção manual do arquivo de trava do Git para restaurar o fluxo de commit. / Manual removal of the Git lock file to restore commit flow. |
 
 ---
 
@@ -86,6 +91,10 @@
 * **Arquitetura Híbrida (CLI & Web):** A separação entre `bin/` (ferramentas de terminal) e `public/` (interface web) segue padrões modernos como os do Laravel e Symfony, protegendo a lógica de negócio do acesso direto via navegador. / *The separation between bin/ (CLI tools) and public/ (web interface) follows modern patterns like Laravel/Symfony, shielding business logic from direct browser access.*
 * **Isolamento de Portas (Dual-Port Management):** A estratégia de rodar o servidor Web na porta **8000** e o MySQL na **3307** elimina conflitos com serviços nativos do Windows e instâncias padrões do XAMPP. / *The strategy of running the Web server on port 8000 and MySQL on 3307 eliminates conflicts with native Windows services and default XAMPP instances.*
 * **Ciclo de Feedback Visual (Live Debugging):** A implementação de uma UI dedicada em `public/index.php` transforma o desenvolvimento de backend em uma experiência visual, facilitando a validação de fluxos de Clearing por partes interessadas. / *The implementation of a dedicated UI in public/index.php transforms backend development into a visual experience, facilitating the validation of clearing flows for stakeholders.*
+* * **Robustez de Carga (Silent Logic):** A implementação de feedbacks visuais (✅/❌) e monitoramento de memória transforma um script "cego" em uma ferramenta de diagnóstico em tempo real. / *The implementation of visual feedback and memory monitoring transforms a "blind" script into a real-time diagnostic tool.*
+* **Sincronia entre IDE e Runtime (Type Hinting):** O uso de DocBlocks para resolver o erro P1009 prova que a arquitetura deve servir tanto ao interpretador PHP quanto às ferramentas de análise estática. / *Using DocBlocks to resolve P1009 errors proves that architecture must serve both the PHP interpreter and static analysis tools.*
+
+
 
 ### 3. Evolução da Arquitetura de Dados / Data Architecture Evolution
 
@@ -94,6 +103,8 @@
 * **Tratamento de Exceções (Exception Handling):** Aplicação de blocos `try/catch` para capturar falhas de banco e fornecer feedback amigável ao usuário. / *Application of try/catch blocks to intercept database failures and provide user-friendly feedback.*
 * **Orquestração de Comandos (Command Pattern):** O uso do `index2.php` como orquestrador permite disparar rotinas complexas (limpeza de logs, testes de conexão) via CLI de forma rápida e segura. / *Using index2.php as an orchestrator allows triggering complex routines (log cleaning, connection tests) via CLI quickly and safely.*
 * **Sanitização de Saída (Output Rendering):** Configuração de cabeçalhos e tratamento de erros no `index.php` público para evitar a "Tela Branca da Morte" (WSOD), garantindo que o sistema sempre informe seu status. / *Header configuration and error handling in the public index.php to prevent the "White Screen of Death" (WSOD), ensuring the system always reports its status.*
+* * **Separação de Motores (Engine Decoupling):** A remoção de classes de teste do fluxo principal (`index.php`) purificou o motor de integração, deixando apenas as dependências funcionais (`Repository` e `Processor`). / *Removing test classes from the main flow purified the integration engine, leaving only functional dependencies.*
+* **Escrita Segura de Log (Atomic Logging):** O uso de `FILE_APPEND` combinado com `LOCK_EX` garante que o registro de transações seja atômico e imune a condições de corrida (Race Conditions). / *Using FILE_APPEND with LOCK_EX ensures transaction logging is atomic and immune to race conditions.*
 
 ### 4. Resolução de Conflitos de Ambiente / Environment Troubleshooting
 
@@ -103,12 +114,16 @@
 * **Gerenciamento de Raiz Virtual (Document Rooting):** O uso do parâmetro `-t` no servidor PHP CLI resolveu definitivamente o erro "Not Found", garantindo que caminhos relativos de CSS e Scripts funcionem sem quebras. / *The use of the -t parameter in the PHP CLI server definitively resolved "Not Found" errors, ensuring relative paths for CSS and Scripts work without breaking.*
 * **Controle de Cache e Persistência (Browser Refresh):** Identificação de gargalos de cache do navegador durante a alteração de scripts, utilizando técnicas de "Hard Reload" para garantir a execução da versão mais recente do código. / *Identification of browser cache bottlenecks during script changes, using Hard Reload techniques to ensure the execution of the latest code version.*
 * **Documentação Viva (README as Log):** A manutenção deste relatório em paralelo ao código assegura que a curva de aprendizado sobre as portas e diretórios seja preservada para futuros desenvolvedores ou auditorias. / *Maintaining this report alongside the code ensures that the learning curve regarding ports and directories is preserved for future developers or audits.*
+* * **Gestão de Dependências Fantasmas (File Sync):** A resolução do erro de "Linha 13" demonstrou a importância de manter o código de orquestração sincronizado com a existência física dos arquivos no disco. / *Resolving the "Line 13" error highlighted the importance of keeping orchestration code synced with the physical existence of files on disk.*
+* **Limpeza de Cache de IDE (Intelephense Refresh):** O enfrentamento de falsos positivos de "Undefined Type" ensinou a distinguir erros reais de sintaxe de atrasos na indexação do editor (VS Code). / *Dealing with "Undefined Type" false positives taught how to distinguish real syntax errors from editor indexing delays.*
 
 ---
 ### 5. Garantia de Qualidade / Quality Assurance (Integration Tests)
 
 * **OrderPersistenceTest:** Validação técnica da camada de persistência, garantindo a integridade dos dados inseridos no MySQL 3307. / *Technical validation of the persistence layer, ensuring data integrity in MySQL 3307.*
 * **PaymentFlowTest:** Teste de integração funcional que simula o ciclo de vida completo de uma transação: Requisição -> API Response -> Logging -> Database Update. / *Functional integration test simulating the complete transaction lifecycle.*
+* * **Refatoração de Estabilização (Stabilization Refactor):** A decisão de simplificar o `index.php` após a deleção de arquivos de teste garantiu a continuidade do sistema sem "breaking changes". / *The decision to simplify index.php after deleting test files ensured system continuity without breaking changes.*
+* **Validação de Tipos Rigorosa (Strict Type Handling):** A remoção de comentários soltos e a padronização de retornos booleanos e strings nos motores garantem que a saída do sistema seja previsível. / *Removing stray comments and standardizing return types in the engines ensures that system output is predictable.*
 ---
 
 ##  Conceitos Aprendidos / Concepts Learned
