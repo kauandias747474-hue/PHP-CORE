@@ -84,4 +84,3 @@
    `php -r "require 'vendor/autoload.php'; echo class_exists('App\Presenters\UserPresenter') ? 'Found!' : 'Error';"`.
 
 ---
-> **"Architecture is about making the important things easy to change."**
