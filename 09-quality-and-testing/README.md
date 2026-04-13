@@ -1,53 +1,56 @@
-# 📁 09-quality-testing-suite
-
+# 09) Quality and Testing
 ## 📖 Descrição / Description
 
-**PT-BR:** Esta camada é a rede de segurança do projeto. Ela contém os testes automatizados que garantem que cada funcionalidade se comporte como esperado. Com esta suíte, podemos refatorar o código ou adicionar novos recursos com a confiança de que não quebramos o que já estava funcionando.
-**EN-US:** This layer is the project's safety net. It contains automated tests that ensure each feature behaves as expected. With this suite, we can refactor code or add new features with the confidence that we haven't broken what was already working.
+**PT-BR:** Este módulo representa a transição do desenvolvimento amador para o profissional. Focamos na criação de um ecossistema sustentável, utilizando padrões de projeto (Design Patterns), organização rigorosa de pastas e uma suíte de testes automatizados para garantir a integridade do software.
+
+**EN-US:** This module represents the transition from amateur to professional development. We focus on creating a sustainable ecosystem using Design Patterns, rigorous folder organization, and an automated testing suite to ensure software integrity.
 
 ---
 
-## 🛠️ Ferramentas de Qualidade / Quality Tools
+## 🧠 Por que este módulo é interessante? / Why this module is interesting?
 
-### 1. Unit Tests (Testes Unitários)
-**PT-BR:** Testam a menor unidade de código possível (funções ou métodos) de forma isolada. São extremamente rápidos e não tocam no banco de dados.
-**EN-US:** They test the smallest possible unit of code (functions or methods) in isolation. They are extremely fast and do not touch the database.
+**PT-BR:** O grande valor deste aprendizado está na **previsibilidade**. Aprendemos que o código não deve apenas "funcionar", mas ser fácil de manter e testar. A introdução de Mocks e Injeção de Dependência nos permite simular cenários complexos sem riscos, dando ao desenvolvedor a confiança necessária para evoluir o sistema sem medo de quebrar funcionalidades antigas.
 
-### 2. Integration Tests (Testes de Integração)
-**PT-BR:** Verificam se diferentes partes do sistema funcionam bem juntas (ex: se o Controller consegue salvar um dado no MySQL através do Repositório).
-**EN-US:** They verify if different parts of the system work well together (e.g., if the Controller can save data to MySQL through the Repository).
+**EN-US:** The great value of this learning lies in **predictability**. We learned that code should not just "work" but be easy to maintain and test. The introduction of Mocks and Dependency Injection allows us to simulate complex scenarios without risks, giving the developer the confidence to evolve the system without fear of breaking old features.
 
-### 3. Mock Objects (Simulações)
-**PT-BR:** Objetos "dublês" que simulam serviços externos (como envio de e-mail ou APIs de pagamento) para que os testes não dependam de internet ou custos externos.
-**EN-US:** "Double" objects that simulate external services (like email sending or payment APIs) so that tests don't depend on internet or external costs.
+---
+
+## 🛠️ Ferramentas e Conexões / Tools and Connections
+
+### 1. Autoload & PSR-4
+**PT-BR:** Utilizamos o **Composer** como o sistema nervoso do projeto. Através do arquivo `composer.json`, mapeamos os namespaces `App\` e `Tests\`, permitindo que o PHP localize qualquer classe instantaneamente.
+**EN-US:** We used **Composer** as the project's nervous system. Through the `composer.json` file, we mapped the `App\` and `Tests\` namespaces, allowing PHP to locate any class instantly.
+
+### 2. Front Controller (index.php)
+**PT-BR:** O arquivo `index.php` atua como o ponto de entrada único (Entry Point). Ele inicializa o ambiente, carrega o Autoload e conecta as camadas de controle e utilitários.
+**EN-US:** The `index.php` file acts as the single entry point. It initializes the environment, loads the Autoload, and connects the control and utility layers.
+
+### 3. Testes e Mocks / Testing & Mocks
+**PT-BR:** Implementamos testes de **Unidade** (lógica isolada) e **Integração** (fluxo entre classes). Usamos **Mocks** (dublês) para simular serviços externos, como envios de e-mail, garantindo testes rápidos e sem custos.
+**EN-US:** We implemented **Unit** tests (isolated logic) and **Integration** tests (flow between classes). We used **Mocks** (doubles) to simulate external services, such as email dispatch, ensuring fast and cost-free tests.
 
 ---
 
 ## 📂 Estrutura de Pastas / Directory Structure
 
-
-
-* **`Unit/`**: 
-    * **PT-BR:** Testes de lógica pura, como validação de CPF ou cálculos matemáticos.
-    * **EN-US:** Pure logic tests, such as tax ID validation or mathematical calculations.
-* **`Integration/`**: 
-    * **PT-BR:** Testes que envolvem banco de dados, sistema de arquivos e rotas de API.
-    * **EN-US:** Tests involving databases, file systems, and API routes.
-* **`Mocks/`**: 
-    * **PT-BR:** Classes que fingem ser serviços reais para isolar os testes.
-    * **EN-US:** Classes that pretend to be real services to isolate tests.
+* **`App/Controllers/`**: Orquestradores da lógica de negócio / Business logic orchestrators.
+* **`App/Utils/`**: Ferramentas auxiliares e formatação / Helper tools and formatting.
+* **`Tests/Unit/`**: Validação de lógica pura / Pure logic validation.
+* **`Tests/Integration/`**: Testes de fluxo entre componentes / Component flow tests.
+* **`Tests/Mocks/`**: Objetos simulados para isolamento / Simulated objects for isolation.
+* **`vendor/`**: Dependências e motor de Autoload (Gerado via Composer) / Dependencies and Autoload engine (Generated via Composer).
 
 ---
+# Testes / Testing:
+PowerShell
+# PT: Executa o teste de integração / EN: Runs the integration test
+php Tests/Integration/UserRegistrationTest.php
 
-## 🚀 O Valor dos Testes / The Value of Testing
 
-* **Prevenção de Regressão:** Garante que um erro corrigido no passado não volte a aparecer.
-* **Documentação Viva:** Os testes mostram exatamente como as classes devem ser usadas.
-* **Código Limpo:** Se algo é difícil de testar, é porque o código está mal desenhado. Testes forçam uma arquitetura melhor.
 
----
+## 🚀 Como Executar / How to Run
 
-## 🧪 Como Executar / How to Run
-
-**PT-BR:** Em um ambiente real, usaríamos o **PHPUnit**. Para esta demonstração, cada arquivo de teste pode ser executado via CLI, exibindo `PASSED` ou `FAILED` para cada validação realizada.
-**EN-US:** In a real environment, we would use **PHPUnit**. For this demonstration, each test file can be run via CLI, displaying `PASSED` or `FAILED` for each validation performed.
+### Servidor Web / Web Server:
+```powershell
+# PT: Inicia o servidor local / EN: Starts the local server
+php -S localhost:8000
