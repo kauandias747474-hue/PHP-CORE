@@ -127,7 +127,7 @@ A organização segue uma hierarquia rigorosa de dependências. As camadas exter
 
 
 ---
----
+
 
 ## 🛠️ Stack Tecnológica de Elite | Elite Tech Stack
 
@@ -162,7 +162,7 @@ Diferente de projetos básicos, aqui o **Composer** não é apenas um gerenciado
 
 ---
 
----
+
 
 ## 👨‍💻 Author | Autoria
 
