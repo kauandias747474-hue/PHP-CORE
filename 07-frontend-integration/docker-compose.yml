@@ -1,1 +1,17 @@
 
+version: '3.8'
+
+services:
+  app:
+    image: php:8.2-apache
+    container_name: modulo7_php
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/html
+    networks:
+      - php-network
+
+networks:
+  php-network:
+    driver: bridge
