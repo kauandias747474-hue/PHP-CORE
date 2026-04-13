@@ -41,16 +41,9 @@
 * **`vendor/`**: Dependências e motor de Autoload (Gerado via Composer) / Dependencies and Autoload engine (Generated via Composer).
 
 ---
-# Testes / Testing:
-PowerShell
-# PT: Executa o teste de integração / EN: Runs the integration test
-php Tests/Integration/UserRegistrationTest.php
 
+### 📝 Explicação Final / Final Explanation
 
+**PT-BR:** Este projeto conclui o Módulo 09 com uma estrutura de pastas profissional que separa o que é "Cérebro" (App) do que é "Verificação" (Tests). Ao usar o Autoload do Composer, removemos a fragilidade de caminhos manuais, tornando o sistema robusto. O uso de Mocks prova que o desenvolvedor entende como isolar componentes para garantir qualidade técnica.
 
-## 🚀 Como Executar / How to Run
-
-### Servidor Web / Web Server:
-```powershell
-# PT: Inicia o servidor local / EN: Starts the local server
-php -S localhost:8000
+**EN-US:** This project concludes Module 09 with a professional folder structure that separates "Brain" (App) from "Verification" (Tests). By using Composer's Autoload, we removed the fragility of manual paths, making the system robust. The use of Mocks proves that the developer understands how to isolate components to ensure technical quality.
