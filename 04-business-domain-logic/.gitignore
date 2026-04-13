@@ -1,1 +1,17 @@
+# Dependências (Geradas pelo Composer)
+/vendor/
 
+# Logs e Dados Temporários
+/logs/*.log
+app.log
+
+# Configurações de Ambiente / Senhas
+.env
+
+# Arquivos do Editor (VS Code / PHPStorm)
+.vscode/
+.idea/
+
+# Sistema Operacional
+.DS_Store
+Thumbs.db
