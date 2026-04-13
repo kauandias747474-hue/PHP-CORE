@@ -1,53 +1,87 @@
-# 📁 07-frontend-integration-layer
+# 07)Front end Integration
 
 ## 📖 Descrição / Description
 
-**PT-BR:** Esta camada é a ponte entre a lógica do servidor (PHP) e a interface do usuário (Browser). Ela é responsável por transformar os dados processados pelo sistema em uma resposta que o cliente entenda, seja ela um JSON estruturado para uma API ou um HTML renderizado via Template Engine.
-**EN-US:** This layer is the bridge between server logic (PHP) and the user interface (Browser). It is responsible for transforming the data processed by the system into a response the client understands, whether it is a structured JSON for an API or an HTML rendered via a Template Engine.
+**PT-BR:** Esta camada é a engenharia de saída de dados. Ela atua como a ponte entre a lógica bruta do PHP e a interface do usuário. Hoje, transformamos o projeto em uma arquitetura modular profissional, garantindo que o back-end e o front-end sejam independentes e escaláveis.
+**EN-US:** This layer is the data output engineering. It acts as the bridge between raw PHP logic and the user interface. Today, we transformed the project into a professional modular architecture, ensuring that the back-end and front-end are independent and scalable.
 
 ---
 
-## 🛠️ Funcionalidades / Features
+## 🛠️ O que construímos hoje / What we built today
 
-### 1. Response Factory
-**PT-BR:** Centraliza a criação de respostas. Garante que todos os JSONs tenham o mesmo formato (ex: `status`, `data`, `errors`) e define os headers HTTP corretos.
-**EN-US:** Centralizes response creation. Ensures all JSONs have the same format (e.g., `status`, `data`, `errors`) and sets the correct HTTP headers.
+### 1. Single Entry Point (index.php)
+**PT-BR:** O "Maestro" do sistema. Ele gerencia o Autoload do Composer e distribui as tarefas para as classes corretas.
+**EN-US:** The "Maestro" of the system. It handles Composer's Autoload and delegates tasks to the correct classes.
 
-### 2. Asset Manager (Gestão de Ativos)
-**PT-BR:** Um facilitador para gerenciar caminhos de arquivos CSS, JavaScript e imagens, evitando caminhos quebrados ao mudar o projeto de servidor.
-**EN-US:** A helper to manage CSS, JavaScript, and image file paths, preventing broken links when moving the project between servers.
+### 2. Asset Manager (assets/AssetHelper.php)
+**PT-BR:** Resolve o problema de caminhos quebrados para CSS e Imagens, tornando o projeto portátil entre Windows, Docker e Produção.
+**EN-US:** Solves the broken paths problem for CSS and Images, making the project portable between Windows, Docker, and Production.
 
-### 3. Simple Template Engine
-**PT-BR:** Sistema de renderização de views que separa o HTML do código PHP e garante o "escape" de dados para evitar ataques de XSS (Cross-Site Scripting).
-**EN-US:** View rendering system that separates HTML from PHP code and ensures data "escaping" to prevent XSS (Cross-Site Scripting) attacks.
-
----
-
-## 📂 Estrutura de Pastas / Directory Structure
-
-
-
-* **`Presenters/`**: 
-    * **PT-BR:** Classes que formatam dados especificamente para a visualização (ex: `UserPresenter.php`).
-    * **EN-US:** Classes that format data specifically for display (e.g., `UserPresenter.php`).
-* **`Responses/`**: 
-    * **PT-BR:** Ex: `JsonResponse.php`. Padroniza o retorno das APIs.
-    * **EN-US:** E.g., `JsonResponse.php`. Standardizes API returns.
-* **`Views/`**: 
-    * **PT-BR:** Arquivos de template (HTML/PHP) que definem o layout do sistema.
-    * **EN-US:** Template files (HTML/PHP) defining the system layout.
+### 3. View Engine (ViewEngine/Renderer.php)
+**PT-BR:** Um motor que injeta dados dinâmicos em arquivos HTML de forma limpa, usando o método `extract()`.
+**EN-US:** An engine that injects dynamic data into HTML files cleanly, using the `extract()` method.
 
 ---
 
-## 🚀 Por que essa camada é importante? / Why is this layer important?
+## 📂 Estrutura de Pastas (Arquitetura Flat) / Directory Structure
 
-* **Segurança:** Ao centralizar a saída de dados, garantimos que qualquer texto enviado ao HTML seja limpo contra scripts maliciosos.
-* **Consistência de API:** O front-end sempre receberá a mesma estrutura de resposta, facilitando o desenvolvimento de SPAs (Vue, React).
-* **Organização:** Impede que códigos `echo` ou tags HTML fiquem espalhados dentro de Controllers ou Regras de Negócio.
+* **`assets/`**: `AssetHelper.php` & CSS files.
+* **`ViewEngine/`**: `Renderer.php` (The template engine).
+* **`Presenters/`**: Data formatting (e.g., `UserPresenter.php`).
+* **`Responses/`**: API standardizing (e.g., `JsonResponse.php`).
+* **`Views/`**: Pure HTML/PHP templates.
+* **`index.php`**: Application entry point.
+
+---
+
+## 🚀 Por que este módulo é interessante? / Why is this module interesting?
+
+**PT-BR:** O grande destaque é o **Desacoplamento**. O sistema agora é "agnóstico" à interface: você pode entregar um site HTML ou uma API JSON mudando apenas uma linha de código, sem tocar na regra de negócio.
+**EN-US:** The highlight is **Decoupling**. The system is now interface-agnostic: you can deliver an HTML site or a JSON API by changing just one line of code, without touching the business logic.
+
+---
+
+## 🛠️ Ferramentas Usadas / Tools Used
+
+* **Docker:** PHP 8.2 Apache (Environment isolation).
+* **Composer:** PSR-4 Autoloading (Zero `include/require` manual).
+* **Intelephense:** PHP static analysis & indexing.
+* **PHP CLI:** Syntax validation and terminal testing.
+
+---
+
+## ❌ Erros Corrigidos & Soluções / Corrected Errors & Solutions
+
+### 1. Class "App\Presenters\UserPresenter" not found
+* **Causa / Cause:** O Composer buscava uma pasta `App/` que não existia fisicamente. / Composer was looking for an `App/` folder that didn't exist physically.
+* **Solução / Solution:** Ajuste no `composer.json` para `"App\\": ""`. / Adjust `composer.json` to `"App\\": ""`.
+* **Comando / Command:** `php composer.phar dump-autoload -o`.
+
+### 2. Erro P1009 (Undefined Type) - VS Code
+* **Causa / Cause:** Cache do Intelephense desatualizado. / Outdated Intelephense cache.
+* **Solução / Solution:** `Ctrl + Shift + P` -> `Intelephense: Index workspace`.
+
+### 3. Diferença de Case (Windows vs Linux)
+* **Causa / Cause:** Windows ignora maiúsculas, mas o Linux (Docker) e o PSR-4 não. / Windows ignores case, but Linux (Docker) and PSR-4 don't.
+* **Solução / Solution:** Padronização rigorosa (Ex: `UserPresenter.php` deve ter `class UserPresenter`). / Strict standardization (e.g., `UserPresenter.php` must have `class UserPresenter`).
 
 ---
 
 ## 🧪 Como Testar / How to Test
 
-**PT-BR:** O teste aqui consiste em verificar o "Output". Chame uma rota e verifique se o JSON retornado possui a chave `status: success`. No HTML, verifique se as variáveis PHP foram renderizadas corretamente nos lugares certos.
-**EN-US:** Testing here consists of checking the "Output". Call a route and verify if the returned JSON has the `status: success` key. In HTML, verify if the PHP variables were correctly rendered in the right places.
+**PT-BR:**
+1. Rode `docker-compose up -d`.
+2. Acesse `http://localhost:8080` para ver o HTML renderizado.
+3. Acesse `http://localhost:8080?api=true` para ver o JSON estruturado.
+4. Use o "Teste de Fogo" no terminal:
+   `php -r "require 'vendor/autoload.php'; echo class_exists('App\Presenters\UserPresenter') ? 'Encontrou!' : 'Erro';"`.
+
+**EN-US:**
+1. Run `docker-compose up -d`.
+2. Access `http://localhost:8080` to see the rendered HTML.
+3. Access `http://localhost:8080?api=true` to see the structured JSON.
+4. Use the terminal "Fire Test":
+   `php -r "require 'vendor/autoload.php'; echo class_exists('App\Presenters\UserPresenter') ? 'Found!' : 'Error';"`.
+
+---
+> **"Architecture is about making the important things easy to change."**
