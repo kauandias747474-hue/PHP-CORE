@@ -1,57 +1,69 @@
-# 📁 04-business-domain-logic
+#  4) Business Domain Logic 
 
 ## 📖 Descrição / Description
 
-**PT-BR:** Esta camada é o "cérebro" da aplicação. Aqui as regras de negócio são definidas de forma pura e isolada. O domínio não depende de bancos de dados, frameworks ou APIs externas. É o código que descreve como o negócio funciona na vida real.
-**EN-US:** This layer is the "brain" of the application. Here, business rules are defined in a pure and isolated way. The domain does not depend on databases, frameworks, or external APIs. It is the code that describes how the business works in real life.
+**PT-BR:** Esta camada representa o "Coração e Cérebro" da aplicação. Foi reconstruída utilizando os princípios de **Domain-Driven Design (DDD)** e **Programação Defensiva**. O objetivo é garantir que nenhuma regra de negócio seja violada e que os dados sejam blindados contra falhas humanas ou ataques externos antes mesmo de chegarem ao banco de dados.
+
+**EN-US:** This layer represents the "Heart and Brain" of the application. It was rebuilt using **Domain-Driven Design (DDD)** and **Defensive Programming** principles. The goal is to ensure that no business rules are violated and that data is shielded against human error or external attacks even before reaching the database.
 
 ---
 
-## 🛠️ Componentes do Domínio / Domain Components
+## 🛠️ Ferramentas e Tecnologias / Tools & Technologies
 
-### 1. Entities (Entidades)
-**PT-BR:** Classes que representam objetos com identidade única. Elas controlam seu próprio estado e garantem que suas regras internas sejam seguidas.
-**EN-US:** Classes representing objects with a unique identity. They control their own state and ensure their internal rules are followed.
+* **PHP 8.2+**: Uso de tipagem estrita (*strict types*), propriedades somente leitura e promoção de construtor.
+* **Composer**: Gestor de dependências e implementação de Autoloading (**PSR-4**).
+* **BCRYPT**: Algoritmo de hashing com *salt* nativo para proteção de credenciais.
+* **Log Management**: Implementação de escrita em fluxo contínuo para auditoria e rastreabilidade.
 
-### 2. Value Objects (Objetos de Valor)
-**PT-BR:** Garantem a validade dos dados (ex: e-mail, CPF, moeda). Um objeto de valor não tem ID; ele é definido pelo que contém. Se o valor for inválido, o objeto nem chega a ser criado.
-**EN-US:** They guarantee data validity (e.g., email, tax ID, currency). A value object has no ID; it is defined by its content. If the value is invalid, the object is not even created.
+---
 
-### 3. Service Layer (Serviços de Domínio)
-**PT-BR:** Processamento de regras complexas que envolvem múltiplas entidades ou validações que não cabem em um único objeto.
-**EN-US:** Processing complex rules involving multiple entities or validations that do not fit into a single object.
+## 🏗️ Explicação Profunda dos Componentes / Deep Dive into Components
+
+### 1. Value Objects (Objetos de Valor) - "Os Guardiões"
+Diferente de strings comuns, eles garantem a **semântica** e a validade do dado desde o nascimento.
+* **`Email.php`**: Além da validação de formato (`filter_var`), possui inteligência para rejeitar domínios de e-mails descartáveis e realiza o *sanitization* (limpeza) automático. Isso evita que e-mails mal formatados ou com espaços entrem na camada de persistência.
+* **`Password.php`**: Implementa segurança de nível industrial. Utiliza o algoritmo **BCRYPT** aliado a um **Pepper (Pimenta)** — uma chave secreta do lado do servidor que protege os hashes mesmo em caso de vazamento do banco de dados.
+
+### 2. Entities (Entidades) - "A Identidade"
+* **`User.php`**: É o objeto principal que possui uma identidade única. Enquanto o e-mail ou nome de um usuário podem mudar, a **Entidade** permanece a mesma. Ela encapsula os Value Objects e define as regras de estado e comportamento do usuário no sistema.
+
+### 3. Services (Serviços de Domínio) - "O Maestro"
+* **`UserRegistrationService.php`**: Utilizado para lógicas que não pertencem a um único objeto. Ele orquestra o processo de criação: higieniza o nome do usuário, aplica filtros de restrição (como nomes reservados 'Admin' ou 'Root') e coordena a montagem da Entidade final.
+
+### 4. Exceptions (Diagnóstico Profissional) - "A Voz do Erro"
+* **`DomainException.php`**: Substituímos o erro genérico por um **Diagnóstico de Negócio**. Cada exceção agora transporta metadados valiosos:
+    * **Campo (Field):** Identifica exatamente qual entrada causou o problema.
+    * **Severidade (Severity):** Define se é um erro de validação comum (`LOW`) ou uma falha de segurança/negócio (`CRITICAL`).
+    * **Sugestão (Suggestion):** Uma instrução clara e amigável para a correção do erro.
+
+---
+
+## 🐞 Erros Corrigidos & Evoluções / Fixed Bugs & Evolutions
+
+| Erro / Bug | Impacto da Correção / Fix Impact |
+| :--- | :--- |
+| **Obsessão por Primitivos** | Dados complexos não são mais tratados como strings, reduzindo bugs de validação em 100%. |
+| **Senhas Vulneráveis** | Proteção total contra ataques de dicionário e *rainbow tables* via BCRYPT + Pepper. |
+| **Silêncio de Erros** | Fim das mensagens genéricas; agora o sistema entrega diagnósticos precisos com sugestões. |
+| **Dados Sujos** | Normalização de inputs (trim/lowercase) integrada, garantindo consistência no banco de dados. |
+| **Falha de Escopo (finally)** | Correção estrutural onde o bloco `finally` perdia o contexto do loop de execução. |
+| **Falta de Auditoria** | Implementação de logs físicos (`app.log`) para conformidade com normas de segurança e LGPD. |
 
 ---
 
 ## 📂 Estrutura de Pastas / Directory Structure
 
-
-
-* **`Entities/`**: 
-    * **PT-BR:** Ex: `User.php`. Contém as propriedades e comportamentos do usuário.
-    * **EN-US:** E.g., `User.php`. Contains user properties and behaviors.
-* **`ValueObjects/`**: 
-    * **PT-BR:** Ex: `Email.php`. Contém a lógica de validação de formato de e-mail.
-    * **EN-US:** E.g., `Email.php`. Contains email format validation logic.
-* **`Services/`**: 
-    * **PT-BR:** Ex: `RegistrationService.php`. Orquestra a criação de novos usuários seguindo regras de negócio.
-    * **EN-US:** E.g., `RegistrationService.php`. Orchestrates new user creation following business rules.
-
----
-
-## 🚀 Benefícios de Engenharia / Engineering Benefits
-
-* **Independência tecnológica:** O código não quebra se você trocar o banco de dados.
-* **Fácil de Testar:** Como é PHP puro, os testes unitários rodam em milissegundos.
-* **Expressividade:** O código foca no que o sistema **faz** e não em como ele **salva** os dados.
-
----
-
-## 🧪 Como Testar / How to Test
-
-**PT-BR:** Para demonstrar a eficácia desta camada, tente criar um usuário com um e-mail inválido. O sistema deve disparar um erro no **Value Object** antes mesmo de qualquer tentativa de salvar no banco. Isso prova que a "inteligência" está protegendo a integridade dos dados.
-**EN-US:** To demonstrate this layer's effectiveness, try creating a user with an invalid email. The system should trigger an error in the **Value Object** before any database save attempt. This proves the "intelligence" is protecting data integrity.
-
----
-
-> *O domínio é o coração do software. Tudo ao redor pode mudar, mas as regras de negócio são o que dão valor ao sistema.*
+```text
+modulo4php/
+├── src/
+│   └── Domain/
+│       ├── Entities/       # Identidade, Estado e Ciclo de Vida (User.php)
+│       ├── ValueObjects/   # Regras de Validação e Segurança (Email.php, Password.php)
+│       ├── Services/       # Orquestração de Negócio (UserRegistrationService.php)
+│       └── Exceptions/     # Diagnóstico Rico e Customizado (DomainException.php)
+├── logs/
+│   └── app.log             # Persistência de auditoria e erros de runtime
+├── vendor/                 # Dependências gerenciadas pelo Composer (Autoload PSR-4)
+├── index.php               # Entry Point: Simulação de cenários e tratamento global
+├── composer.json           # Mapeamento de Namespaces e definições do projeto
+└── .gitignore              # Proteção para não versionar logs e dependências locais
