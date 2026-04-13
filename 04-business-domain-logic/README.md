@@ -50,6 +50,33 @@ Diferente de strings comuns, eles garantem a **semântica** e a validade do dado
 | **Falta de Auditoria** | Implementação de logs físicos (`app.log`) para conformidade com normas de segurança e LGPD. |
 
 ---
+## 💡 Por que esta abordagem é interessante? / Why this approach is interesting?
+
+**PT-BR:**
+O que torna este projeto especial não é apenas o código PHP, mas a mentalidade de **Arquitetura de Software** aplicada. Durante o desenvolvimento, foquei em resolver problemas reais de engenharia:
+
+1.  **Blindagem de Dados:** Achei fascinante como o uso de *Value Objects* impede que o sistema aceite dados "sujos". O erro é barrado na fronteira, economizando processamento e evitando corrupção no banco de dados.
+2.  **Criptografia como Estratégia:** A implementação do **Pepper (Pimenta)** junto ao BCRYPT foi um divisor de águas. Entendi que segurança não é apenas esconder uma senha, mas criar camadas que tornam o trabalho do atacante matematicamente inviável.
+3.  **Comunicação Clara via Exceptions:** Geralmente, Exceptions são vistas como "o sistema quebrou". Aqui, elas foram transformadas em uma ferramenta de comunicação rica (Diagnósticos), que diz exatamente o que aconteceu e como consertar.
+4.  **Desacoplamento Real:** É incrível ver que as regras de negócio (o "Cérebro") estão totalmente isoladas. Se amanhã eu decidir mudar de um banco MySQL para um MongoDB, ou de um servidor Apache para Nginx, o coração do meu negócio continua intacto e funcional.
+
+**EN-US:**
+What makes this project special is not just the PHP code, but the **Software Architecture** mindset applied. During development, I focused on solving real engineering problems:
+
+1.  **Data Shielding:** I found it fascinating how using *Value Objects* prevents the system from accepting "dirty" data. The error is blocked at the border, saving processing power and avoiding database corruption.
+2.  **Cryptography as a Strategy:** Implementing **Pepper** alongside BCRYPT was a game-changer. I realized that security isn't just about hiding a password, but about creating layers that make an attacker's job mathematically unfeasible.
+3.  **Clear Communication via Exceptions:** Usually, Exceptions are seen as "the system broke." Here, they were transformed into a rich communication tool (Diagnostics) that says exactly what happened and how to fix it.
+4.  **True Decoupling:** It's amazing to see that the business rules (the "Brain") are completely isolated. If tomorrow I decide to switch from a MySQL database to MongoDB, or from an Apache server to Nginx, the heart of my business remains intact and functional.
+
+---
+
+## 🛠️ O que aprendi nesta jornada / What I learned in this journey
+
+* **Clean Code:** Menos `if/else` espalhados e mais objetos inteligentes.
+* **PSR-4:** A importância de padrões de organização para projetos escaláveis.
+* **Security First:** Validar, higienizar e criptografar são passos não negociáveis.
+* **Responsabilidade Única (SRP):** Cada classe faz apenas uma coisa e a faz com excelência.
+
 
 ## 📂 Estrutura de Pastas / Directory Structure
 
