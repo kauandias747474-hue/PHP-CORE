@@ -1,5 +1,5 @@
 # 09) Quality and Testing
-## 📖 Descrição / Description
+##  Descrição / Description
 
 **PT-BR:** Este módulo representa a transição do desenvolvimento amador para o profissional. Focamos na criação de um ecossistema sustentável, utilizando padrões de projeto (Design Patterns), organização rigorosa de pastas e uma suíte de testes automatizados para garantir a integridade do software.
 
@@ -7,7 +7,7 @@
 
 ---
 
-## 🧠 Por que este módulo é interessante? / Why this module is interesting?
+##  Por que este módulo é interessante? / Why this module is interesting?
 
 **PT-BR:** O grande valor deste aprendizado está na **previsibilidade**. Aprendemos que o código não deve apenas "funcionar", mas ser fácil de manter e testar. A introdução de Mocks e Injeção de Dependência nos permite simular cenários complexos sem riscos, dando ao desenvolvedor a confiança necessária para evoluir o sistema sem medo de quebrar funcionalidades antigas.
 
@@ -15,7 +15,7 @@
 
 ---
 
-## 🛠️ Ferramentas e Conexões / Tools and Connections
+##  Ferramentas e Conexões / Tools and Connections
 
 ### 1. Autoload & PSR-4
 **PT-BR:** Utilizamos o **Composer** como o sistema nervoso do projeto. Através do arquivo `composer.json`, mapeamos os namespaces `App\` e `Tests\`, permitindo que o PHP localize qualquer classe instantaneamente.
@@ -31,7 +31,7 @@
 
 ---
 
-## 📂 Estrutura de Pastas / Directory Structure
+##  Estrutura de Pastas / Directory Structure
 
 * **`App/Controllers/`**: Orquestradores da lógica de negócio / Business logic orchestrators.
 * **`App/Utils/`**: Ferramentas auxiliares e formatação / Helper tools and formatting.
@@ -42,7 +42,7 @@
 
 ---
 
-### 📝 Explicação Final / Final Explanation
+### Explicação Final / Final Explanation
 
 **PT-BR:** Este projeto conclui o Módulo 09 com uma estrutura de pastas profissional que separa o que é "Cérebro" (App) do que é "Verificação" (Tests). Ao usar o Autoload do Composer, removemos a fragilidade de caminhos manuais, tornando o sistema robusto. O uso de Mocks prova que o desenvolvedor entende como isolar componentes para garantir qualidade técnica.
 
