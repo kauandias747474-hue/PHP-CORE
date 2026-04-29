@@ -2,7 +2,7 @@
 
 ---
 
-## 📖 Resumo Executivo / Executive Summary
+##  Resumo Executivo / Executive Summary
 
 **PT-BR:**
 Este projeto marca a transição do desenvolvimento procedural para a **Arquitetura Orientada a Objetos Profissional**. O foco central foi a criação de uma camada de **Infraestrutura Técnica (Módulo 05)**, que separa as ferramentas de suporte (formatação, validação e auxílio) da lógica de negócio principal. O resultado é um sistema altamente modular, onde cada componente possui uma responsabilidade única e bem definida.
@@ -12,7 +12,7 @@ This project marks the transition from procedural development to **Professional 
 
 ---
 
-## 🏛️ Explicação Detalhada da Arquitetura / Detailed Architectural Breakdown
+## Explicação Detalhada da Arquitetura / Detailed Architectural Breakdown
 
 **PT-BR:** O sistema foi estruturado para ser imune ao "Código Espaguete". Abaixo, detalhamos como cada peça se encaixa:
 **EN-US:** The system was structured to be immune to "Spaghetti Code". Below, we detail how each piece fits together:
@@ -41,7 +41,7 @@ This project marks the transition from procedural development to **Professional 
 
 ---
 
-## 💡 Por que este projeto é um diferencial? / Why is this project a standout?
+##  Por que este projeto é um diferencial? / Why is this project a standout?
 
 **PT-BR:**
 * **Previsibilidade Profissional:** Organização clara que permite encontrar lógicas específicas em segundos.
@@ -55,7 +55,7 @@ This project marks the transition from procedural development to **Professional 
 
 ---
 
-## 🛠️ Desafios Técnicos Vencidos / Technical Challenges Overcome
+##  Desafios Técnicos Vencidos / Technical Challenges Overcome
 
 **1. Case Sensitivity & Autoload:**
 * **PT:** Resolução de conflitos de nomes de arquivos para compatibilidade total entre Windows e Linux.
@@ -67,7 +67,7 @@ This project marks the transition from procedural development to **Professional 
 
 ---
 
-## 🚀 Como Executar / How to Run
+## Como Executar / How to Run
 
 1. **Sincronizar mapa de classes / Sync class map:**
     ```bash
@@ -84,7 +84,7 @@ This project marks the transition from procedural development to **Professional 
 
 ---
 
-## ⚙️ Configuração de Autoload / Autoload Configuration
+##  Configuração de Autoload / Autoload Configuration
 
 **PT-BR:** Abaixo, a configuração final do `composer.json` que amarra todo o projeto.
 **EN-US:** Below, the final `composer.json` configuration that binds the entire project together.
