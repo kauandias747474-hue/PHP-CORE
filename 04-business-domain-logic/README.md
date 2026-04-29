@@ -1,6 +1,6 @@
 #  4) Business Domain Logic 
 
-## 📖 Descrição / Description
+##  Descrição / Description
 
 **PT-BR:** Esta camada representa o "Coração e Cérebro" da aplicação. Foi reconstruída utilizando os princípios de **Domain-Driven Design (DDD)** e **Programação Defensiva**. O objetivo é garantir que nenhuma regra de negócio seja violada e que os dados sejam blindados contra falhas humanas ou ataques externos antes mesmo de chegarem ao banco de dados.
 
@@ -8,7 +8,7 @@
 
 ---
 
-## 🛠️ Ferramentas e Tecnologias / Tools & Technologies
+##  Ferramentas e Tecnologias / Tools & Technologies
 
 * **PHP 8.2+**: Uso de tipagem estrita (*strict types*), propriedades somente leitura e promoção de construtor.
 * **Composer**: Gestor de dependências e implementação de Autoloading (**PSR-4**).
@@ -17,7 +17,7 @@
 
 ---
 
-## 🏗️ Explicação Profunda dos Componentes / Deep Dive into Components
+##  Explicação Profunda dos Componentes / Deep Dive into Components
 
 ### 1. Value Objects (Objetos de Valor) - "Os Guardiões"
 Diferente de strings comuns, eles garantem a **semântica** e a validade do dado desde o nascimento.
@@ -38,7 +38,7 @@ Diferente de strings comuns, eles garantem a **semântica** e a validade do dado
 
 ---
 
-## 🐞 Erros Corrigidos & Evoluções / Fixed Bugs & Evolutions
+##  Erros Corrigidos & Evoluções / Fixed Bugs & Evolutions
 
 | Erro / Bug | Impacto da Correção / Fix Impact |
 | :--- | :--- |
@@ -50,7 +50,7 @@ Diferente de strings comuns, eles garantem a **semântica** e a validade do dado
 | **Falta de Auditoria** | Implementação de logs físicos (`app.log`) para conformidade com normas de segurança e LGPD. |
 
 ---
-## 💡 Por que esta abordagem é interessante? / Why this approach is interesting?
+##  Por que esta abordagem é interessante? / Why this approach is interesting?
 
 **PT-BR:**
 O que torna este projeto especial não é apenas o código PHP, mas a mentalidade de **Arquitetura de Software** aplicada. Durante o desenvolvimento, foquei em resolver problemas reais de engenharia:
@@ -70,7 +70,7 @@ What makes this project special is not just the PHP code, but the **Software Arc
 
 ---
 
-## 🛠️ O que aprendi nesta jornada / What I learned in this journey
+##  O que aprendi nesta jornada / What I learned in this journey
 
 * **Clean Code:** Menos `if/else` espalhados e mais objetos inteligentes.
 * **PSR-4:** A importância de padrões de organização para projetos escaláveis.
@@ -78,7 +78,7 @@ What makes this project special is not just the PHP code, but the **Software Arc
 * **Responsabilidade Única (SRP):** Cada classe faz apenas uma coisa e a faz com excelência.
 
 
-## 📂 Estrutura de Pastas / Directory Structure
+##  Estrutura de Pastas / Directory Structure
 
 ```text
 modulo4php/
