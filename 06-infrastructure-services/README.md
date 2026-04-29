@@ -1,29 +1,29 @@
 # 06)Infrastructure Services
 
-## 📖 Descrição / Description
+##  Descrição / Description
 
 **PT-BR:** Este módulo representa a "espinha dorsal" técnica do sistema. Ele isola as comunicações com o mundo externo (APIs, sistemas de arquivos e logs) da lógica de negócio principal. O objetivo central foi criar uma **Camada de Abstração**, garantindo que o sistema não dependa de ferramentas específicas, mas sim de capacidades técnicas bem definidas e intercambiáveis.
 **EN-US:** This module represents the system's technical "backbone." It isolates communications with the outside world (APIs, file systems, and logs) from the core business logic. The central goal was to create an **Abstraction Layer**, ensuring the system doesn't rely on specific tools but on well-defined and interchangeable technical capabilities.
 
 ---
 
-## 🛠️ Funcionalidades / Features
+##  Funcionalidades / Features
 
-### 1. 📜 FileLogger (Auditoria e Diagnóstico / Auditing & Diagnostics)
+### 1.  FileLogger (Auditoria e Diagnóstico / Auditing & Diagnostics)
 * **PT-BR:** Centraliza o registro de eventos e erros usando a constante `FILE_APPEND`. Isso permite rastrear falhas críticas em tempo real sem sobrescrever dados anteriores, sendo fundamental para a saúde da aplicação em produção.
 * **EN-US:** Centralizes event and error logging using the `FILE_APPEND` constant. This allows tracking critical failures in real-time without overwriting previous data, which is essential for application health in production.
 
-### 2. 📧 SendGridMailer (Mensageria Transacional / Transactional Messaging)
+### 2.  SendGridMailer (Mensageria Transacional / Transactional Messaging)
 * **PT-BR:** Abstrai o envio de e-mails via API. O diferencial deste serviço é a resiliência: utilizamos blocos `try/catch` para garantir que instabilidades em serviços de terceiros (como o SendGrid) sejam tratadas sem interromper a experiência do usuário.
 * **EN-US:** Abstracts email sending via API. The key differentiator for this service is resilience: we use `try/catch` blocks to ensure that instabilities in third-party services (like SendGrid) are handled without interrupting the user experience.
 
-### 3. ☁️ S3Storage (Armazenamento em Nuvem / Cloud Storage)
+### 3.  S3Storage (Armazenamento em Nuvem / Cloud Storage)
 * **PT-BR:** Gerencia o upload de arquivos para o AWS S3. Este serviço demonstra como a infraestrutura pode evoluir de um disco local para a nuvem de forma transparente para o resto do sistema.
 * **EN-US:** Manages file uploads to AWS S3. This service demonstrates how infrastructure can evolve from a local disk to the cloud transparently for the rest of the system.
 
 ---
 
-## 📂 Estrutura de Pastas / Directory Structure
+##  Estrutura de Pastas / Directory Structure
 
 O projeto utiliza o padrão **PSR-4** para carregamento automático (Autoloading).
 The project follows the **PSR-4** standard for automatic class loading.
@@ -36,7 +36,7 @@ The project follows the **PSR-4** standard for automatic class loading.
 
 ---
 
-## 💡 Por que este projeto é interessante? / Why is this project interesting?
+##  Por que este projeto é interessante? / Why is this project interesting?
 
 **PT-BR:** Este projeto é fascinante porque ele resolve o problema do "código espaguete". Em vez de espalhar configurações de API por toda a aplicação, criamos um porto seguro para a infraestrutura. O que mais me chamou a atenção foi ver como o **Composer** organiza o caos: ele transforma pastas simples em uma estrutura hierárquica profissional que segue padrões globais de desenvolvimento.
 **EN-US:** This project is fascinating because it solves the "spaghetti code" problem. Instead of scattering API configurations throughout the application, we created a safe harbor for the infrastructure. What caught my attention most was seeing how **Composer** organizes chaos: it transforms simple folders into a professional hierarchical structure that follows global development standards.
