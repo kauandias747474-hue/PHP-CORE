@@ -1,6 +1,6 @@
 # 8) Api and Routing 
 
-## 📖 Descrição / Description
+##  Descrição / Description
 
 **PT-BR:** Esta camada é o "Cérebro de Navegação" do projeto. Abandonamos o acesso direto a arquivos `.php` para implementar um **Front Controller** robusto. O sistema agora centraliza todas as requisições no `index.php`, utiliza um **Dispatcher** para orquestrar rotas, e aplica **Middlewares** para garantir segurança antes que qualquer lógica de negócio seja executada.
 
@@ -8,7 +8,7 @@
 
 ---
 
-## 🛠️ O que construímos / What we built
+##  O que construímos / What we built
 
 ### 1. Autoloading & PSR-4 (The Backbone)
 * **PT-BR:** Configuramos o **Composer** para mapear o namespace `App\` diretamente para a raiz do projeto, eliminando a necessidade de `require` manuais e garantindo uma arquitetura profissional.
@@ -28,7 +28,7 @@
 
 ---
 
-## 📂 Estrutura de Pastas / Directory Structure
+##  Estrutura de Pastas / Directory Structure
 
 * **`index.php`**: O ponto de entrada (Recepcionista).
 * **`web.php`**: O mapa principal de rotas (Cardápio).
