@@ -9,7 +9,7 @@
 
 ---
 
-### 🌐 Overview | Visão Geral do Ecossistema
+###  Overview | Visão Geral do Ecossistema
 
 **EN:** This project is a rigorous exploration of **Pure PHP Core**, designed to demonstrate that high-level software engineering does not require heavy frameworks to be scalable, secure, and efficient. Instead of using "magic" shortcuts, every component—from the custom **PSR-4 Autoloader** and **Dependency Injection Container** to the **Front Controller** and **Routing Engine**—was built from the ground up. 
 
@@ -23,14 +23,14 @@ A arquitetura segue os princípios de **Clean Architecture** e **Domain-Driven D
 
 ---
 
-### 🚀 Pilares Técnicos | Technical Pillars
+###  Pilares Técnicos | Technical Pillars
 
 * **Zero Framework Dependency:** Independência total de pacotes externos para o core da aplicação.
 * **Decoupled Infrastructure:** Camadas de abstração que permitem trocar serviços de e-mail ou storage sem alterar uma linha de lógica de negócio.
 * **Defensive Programming:** Uso de *Value Objects* e *Strict Typing* para garantir a integridade dos dados desde a entrada.
 * **Quality First:** Suíte de testes (Unit & Integration) com uso de *Mocks* para garantir estabilidade e previsibilidade.
 
-# 💡 Proposta de Valor | Value Proposition
+#  Proposta de Valor | Value Proposition
 
 Como o projeto é focado em **PHP Core Puro**, a proposta de valor foi ajustada para destacar a construção das fundações que os frameworks geralmente ocultam. O diferencial reside em provar que é possível obter alta performance e organização rigorosa sem o "bloat" (excesso) de dependências externas. As referências a nomes anteriores e ciclos de frameworks foram removidas para focar em **Arquitetura de Baixo Nível** e no **Controle Total do Estado**.
 
@@ -52,7 +52,7 @@ Como o projeto é focado em **PHP Core Puro**, a proposta de valor foi ajustada 
 
 ---
 
-### 🛠️ O que foi refinado:
+###  O que foi refinado:
 
 * **Foco no "Zero-Magic":** O valor agora está em entender o que acontece por baixo do capô, algo extremamente valorizado para cargos de nível Pleno/Sênior.
 * **Eficiência Bitwise:** Mantivemos este ponto, pois ele demonstra domínio de Ciência da Computação aplicado ao PHP nativo.
@@ -60,19 +60,19 @@ Como o projeto é focado em **PHP Core Puro**, a proposta de valor foi ajustada 
 
 ---
 
----
 
-## 🏗️ Pilares de Engenharia | Engineering Pillars
 
-### 🧠 Performance & Memory Strategy
+##  Pilares de Engenharia | Engineering Pillars
+
+###  Performance & Memory Strategy
 * **Bitwise Operations:** * **PT:** Utilização de operadores binários para compactação extrema de dados. Ex: Gerenciamento de matrizes de permissão complexas em um único campo `integer`, reduzindo o consumo de memória e acelerando a comparação lógica.
   * **EN:** Use of binary operators for extreme data compaction. Ex: Managing complex permission matrices in a single `integer` field, reducing memory footprint and accelerating logical comparisons.
-* **Big O Awareness ($O(1)$ Focus):** * **PT:** Seleção rigorosa de estruturas de dados e algoritmos para garantir que a latência permaneça constante, independentemente do crescimento do volume de dados.
+* **Big O Awareness :** * **PT:** Seleção rigorosa de estruturas de dados e algoritmos para garantir que a latência permaneça constante, independentemente do crescimento do volume de dados.
   * **EN:** Rigorous selection of data structures and algorithms to ensure latency remains constant, regardless of data volume growth.
 * **Long-Running Process Optimization:** * **PT:** Estratégias de gerenciamento de memória voltadas para processos de longa duração, minimizando ciclos de Garbage Collection e prevenindo *memory leaks* em execuções via CLI/Daemon.
   * **EN:** Memory management strategies for long-running processes, minimizing Garbage Collection cycles and preventing memory leaks in CLI/Daemon executions.
 
-### 🛡️ Security-First Architecture
+###  Security-First Architecture
 * **Cryptographic Sovereignty (AES-256-GCM + Pepper):** * **PT:** Implementação de criptografia autenticada de alto nível e hashing de senhas com estratégia de *Pepper* (segredo do servidor), garantindo integridade e sigilo contra ataques de dicionário.
   * **EN:** Implementation of high-level authenticated encryption and password hashing with a *Pepper* strategy (server secret), ensuring integrity and secrecy against dictionary attacks.
 * **Strict Defensive Layer (DTOs & Value Objects):** * **PT:** Blindagem total contra *Mass Assignment* e estados inválidos. Os dados são validados e tipados rigidamente via **Value Objects** antes de atingirem o núcleo do sistema.
@@ -83,7 +83,7 @@ Como o projeto é focado em **PHP Core Puro**, a proposta de valor foi ajustada 
 ---
 
 
-## 📂 Arquitetura do Projeto | Project Structure
+## Arquitetura do Projeto | Project Structure
 
 A organização segue uma hierarquia rigorosa de dependências. As camadas externas são isoladas através de interfaces, garantindo que o **Core** da aplicação seja imutável, testável e independente de tecnologias de terceiros.
 
@@ -129,7 +129,7 @@ A organização segue uma hierarquia rigorosa de dependências. As camadas exter
 ---
 
 
-## 🛠️ Stack Tecnológica de Elite | Elite Tech Stack
+##  Stack Tecnológica de Elite | Elite Tech Stack
 
 <p align="center">
   <img src="https://img.shields.io/badge/PHP-8.3-777BB4?style=for-the-badge&logo=php&logoColor=white" alt="PHP 8.3">
@@ -152,7 +152,7 @@ A organização segue uma hierarquia rigorosa de dependências. As camadas exter
 
 ---
 
-### 📦 O Coração da Infraestrutura: Composer & PSR-4
+###  O Coração da Infraestrutura: Composer & PSR-4
 
 Diferente de projetos básicos, aqui o **Composer** não é apenas um gerenciador de pacotes, mas a peça central que habilita a arquitetura modular:
 
@@ -174,7 +174,7 @@ Diferente de projetos básicos, aqui o **Composer** não é apenas um gerenciado
 
 ---
 
-### 📩 Contact / Contato
+###  Contact / Contato
 - **LinkedIn:** [Kauan Oliveira](https://www.linkedin.com/in/kauan-oliveira-324264378/)
 - **GitHub:** [kauandias747474-hue](https://github.com/kauandias747474-hue)
 
