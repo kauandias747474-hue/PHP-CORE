@@ -1,13 +1,13 @@
 # 07)Front end Integration
 
-## 📖 Descrição / Description
+##  Descrição / Description
 
 **PT-BR:** Esta camada é a engenharia de saída de dados. Ela atua como a ponte entre a lógica bruta do PHP e a interface do usuário. Hoje, transformamos o projeto em uma arquitetura modular profissional, garantindo que o back-end e o front-end sejam independentes e escaláveis.
 **EN-US:** This layer is the data output engineering. It acts as the bridge between raw PHP logic and the user interface. Today, we transformed the project into a professional modular architecture, ensuring that the back-end and front-end are independent and scalable.
 
 ---
 
-## 🛠️ O que construímos hoje / What we built today
+##  O que construímos hoje / What we built today
 
 ### 1. Single Entry Point (index.php)
 **PT-BR:** O "Maestro" do sistema. Ele gerencia o Autoload do Composer e distribui as tarefas para as classes corretas.
@@ -23,7 +23,7 @@
 
 ---
 
-## 📂 Estrutura de Pastas (Arquitetura Flat) / Directory Structure
+##  Estrutura de Pastas (Arquitetura Flat) / Directory Structure
 
 * **`assets/`**: `AssetHelper.php` & CSS files.
 * **`ViewEngine/`**: `Renderer.php` (The template engine).
@@ -34,14 +34,14 @@
 
 ---
 
-## 🚀 Por que este módulo é interessante? / Why is this module interesting?
+##  Por que este módulo é interessante? / Why is this module interesting?
 
 **PT-BR:** O grande destaque é o **Desacoplamento**. O sistema agora é "agnóstico" à interface: você pode entregar um site HTML ou uma API JSON mudando apenas uma linha de código, sem tocar na regra de negócio.
 **EN-US:** The highlight is **Decoupling**. The system is now interface-agnostic: you can deliver an HTML site or a JSON API by changing just one line of code, without touching the business logic.
 
 ---
 
-## 🛠️ Ferramentas Usadas / Tools Used
+##  Ferramentas Usadas / Tools Used
 
 * **Docker:** PHP 8.2 Apache (Environment isolation).
 * **Composer:** PSR-4 Autoloading (Zero `include/require` manual).
@@ -50,7 +50,7 @@
 
 ---
 
-## ❌ Erros Corrigidos & Soluções / Corrected Errors & Solutions
+##  Erros Corrigidos & Soluções / Corrected Errors & Solutions
 
 ### 1. Class "App\Presenters\UserPresenter" not found
 * **Causa / Cause:** O Composer buscava uma pasta `App/` que não existia fisicamente. / Composer was looking for an `App/` folder that didn't exist physically.
@@ -67,7 +67,7 @@
 
 ---
 
-## 🧪 Como Testar / How to Test
+##  Como Testar / How to Test
 
 **PT-BR:**
 1. Rode `docker-compose up -d`.
